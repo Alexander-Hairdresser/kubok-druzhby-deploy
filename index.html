@@ -2318,11 +2318,15 @@ function renderBudget() {
   // Restore budget from localStorage
   try {
     const saved = JSON.parse(localStorage.getItem('kubokBudget') || '{}');
+    document.querySelectorAll('.budget-input').forEach(input => {
+      input.value = '';
+      input.classList.remove('has-value');
+    });
     Object.keys(saved).forEach(key => {
       const input = document.querySelector(`.budget-input[data-budget="${key.split('_')[0]}"][data-type="${key.split('_')[1]}"]`);
-      if (input && saved[key]) {
+      if (input && saved[key] !== undefined && saved[key] !== null) {
         input.value = saved[key];
-        input.classList.add('has-value');
+        input.classList.toggle('has-value', Boolean(saved[key]));
       }
     });
     updateBudgetTotals();
@@ -2485,6 +2489,7 @@ async function loadData() {
     
     // Restore checkboxes from API
     if (data.checkboxes && Object.keys(data.checkboxes).length > 0) {
+      document.querySelectorAll('.checkbox.checked').forEach(el => el.classList.remove('checked'));
       Object.keys(data.checkboxes).forEach(key => {
         const [cat, task] = key.split('_');
         const el = document.querySelector(`.checkbox[data-cat="${cat}"][data-task="${task}"]`);
@@ -2495,12 +2500,16 @@ async function loadData() {
     
     // Restore budget from API
     if (data.budget && Object.keys(data.budget).length > 0) {
+      document.querySelectorAll('.budget-input').forEach(input => {
+        input.value = '';
+        input.classList.remove('has-value');
+      });
       Object.keys(data.budget).forEach(key => {
         const [idx, type] = key.split('_');
         const input = document.querySelector(`.budget-input[data-budget="${idx}"][data-type="${type}"]`);
-        if (input && data.budget[key]) {
+        if (input && data.budget[key] !== undefined && data.budget[key] !== null) {
           input.value = data.budget[key];
-          input.classList.add('has-value');
+          input.classList.toggle('has-value', Boolean(data.budget[key]));
         }
       });
       localStorage.setItem('kubokBudget', JSON.stringify(data.budget));
@@ -2543,6 +2552,7 @@ function restoreFromLocalStorage() {
   // Checkboxes from localStorage
   try {
     const checks = JSON.parse(localStorage.getItem('kubokCheckboxes') || '{}');
+    document.querySelectorAll('.checkbox.checked').forEach(el => el.classList.remove('checked'));
     Object.keys(checks).forEach(key => {
       const [cat, task] = key.split('_');
       const el = document.querySelector(`.checkbox[data-cat="${cat}"][data-task="${task}"]`);
@@ -2553,12 +2563,16 @@ function restoreFromLocalStorage() {
   // Budget from localStorage
   try {
     const budget = JSON.parse(localStorage.getItem('kubokBudget') || '{}');
+    document.querySelectorAll('.budget-input').forEach(input => {
+      input.value = '';
+      input.classList.remove('has-value');
+    });
     Object.keys(budget).forEach(key => {
       const [idx, type] = key.split('_');
       const input = document.querySelector(`.budget-input[data-budget="${idx}"][data-type="${type}"]`);
-      if (input && budget[key]) {
+      if (input && budget[key] !== undefined && budget[key] !== null) {
         input.value = budget[key];
-        input.classList.add('has-value');
+        input.classList.toggle('has-value', Boolean(budget[key]));
       }
     });
     updateBudgetTotals();
@@ -2612,9 +2626,7 @@ async function saveAllData() {
     const budget = {};
     document.querySelectorAll('.budget-input').forEach(input => {
       const key = input.dataset.budget + '_' + input.dataset.type;
-      if (input.value.trim()) {
-        budget[key] = input.value.trim();
-      }
+      budget[key] = input.value.trim();
     });
     
     // Always save EVERYTHING to localStorage (instant, reliable, works offline)
@@ -2728,10 +2740,10 @@ let gameRAF = null;
 let gameCleanup = null;
 
 const gameAssets = {
-  goal: Object.assign(new Image(), { src: 'kubok-assets/ворота.PNG' }),
+  goal: Object.assign(new Image(), { src: 'kubok-assets/ворота 2.png' }),
   keeper: {
     low: Object.assign(new Image(), { src: 'kubok-assets/ловлю.PNG' }),
-    high: Object.assign(new Image(), { src: 'kubok-assets/отбито.PNG' }),
+    save: Object.assign(new Image(), { src: 'kubok-assets/отбито.png' }),
     miss: Object.assign(new Image(), { src: 'kubok-assets/мимо.PNG' }),
     goal: Object.assign(new Image(), { src: 'kubok-assets/гол.PNG' }),
   },
@@ -3001,7 +3013,7 @@ function initGame() {
     } else if (keeperReaction === 'goal') {
       sprite = gameAssets.keeper.goal;
     } else if (keeperReaction === 'save') {
-      sprite = gameAssets.keeper.high;
+      sprite = gameAssets.keeper.save;
     }
     if (drawImageContain(ctx, sprite, k.x - k.w * 1.7, k.y - k.h * 1.6, k.w * 3.8, k.h * 3.6)) {
       return;
