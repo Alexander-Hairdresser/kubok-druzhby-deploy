@@ -2728,9 +2728,10 @@ let gameRAF = null;
 let gameCleanup = null;
 
 const gameAssets = {
+  goal: Object.assign(new Image(), { src: 'kubok-assets/ворота.PNG' }),
   keeper: {
-    low: Object.assign(new Image(), { src: 'kubok-assets/гол.PNG' }),
-    high: Object.assign(new Image(), { src: 'kubok-assets/ловлю.PNG' }),
+    low: Object.assign(new Image(), { src: 'kubok-assets/ловлю.PNG' }),
+    high: Object.assign(new Image(), { src: 'kubok-assets/отбито.PNG' }),
     miss: Object.assign(new Image(), { src: 'kubok-assets/мимо.PNG' }),
     goal: Object.assign(new Image(), { src: 'kubok-assets/гол.PNG' }),
   },
@@ -2839,11 +2840,11 @@ function initGame() {
     postW: 0,
     reset() {
       const W = canvas.width, H = canvas.height;
-      this.w = W * 0.35;
-      this.h = H * 0.12;
+      this.w = W * 0.5;
+      this.h = H * 0.085;
       this.postW = Math.max(4, W * 0.008);
       this.x = W / 2 - this.w / 2;
-      this.y = H * 0.08;
+      this.y = H * 0.06;
       this.speed = 1.5 + level * 0.5;
     }
   };
@@ -2854,9 +2855,9 @@ function initGame() {
     speed: 0, dir: 1,
     reset() {
       const W = canvas.width, H = canvas.height;
-      this.w = Math.max(30, W * 0.06);
-      this.h = Math.max(40, H * 0.08);
-      this.y = goal.y + goal.h + 4;
+      this.w = Math.max(26, W * 0.055);
+      this.h = Math.max(34, H * 0.07);
+      this.y = goal.y + goal.h + 2;
       this.x = goal.x + goal.w / 2 - this.w / 2;
       this.speed = 1 + level * 0.4;
     }
@@ -2869,9 +2870,9 @@ function initGame() {
     active: false,
     reset() {
       const W = canvas.width, H = canvas.height;
-      this.r = Math.max(8, W * 0.015);
+      this.r = Math.max(13, W * 0.022);
       this.x = W / 2;
-      this.y = H * 0.82;
+      this.y = H * 0.8;
       this.vx = 0;
       this.vy = 0;
       this.active = false;
@@ -2963,6 +2964,9 @@ function initGame() {
 
   function drawGoal(W, H) {
     const g = goal;
+    if (drawImageContain(ctx, gameAssets.goal, g.x - g.postW * 12, g.y - g.h * 0.65, g.w + g.postW * 24, g.h * 3.2)) {
+      return;
+    }
     // Net
     ctx.fillStyle = 'rgba(255,255,255,0.06)';
     ctx.fillRect(g.x, g.y, g.w, g.h);
@@ -2999,7 +3003,7 @@ function initGame() {
     } else if (keeperReaction === 'save') {
       sprite = gameAssets.keeper.high;
     }
-    if (drawImageCover(ctx, sprite, k.x - k.w * 1.9, k.y - k.h * 2.1, k.w * 4.8, k.h * 4.2)) {
+    if (drawImageContain(ctx, sprite, k.x - k.w * 1.7, k.y - k.h * 1.6, k.w * 3.8, k.h * 3.6)) {
       return;
     }
     // Body
@@ -3036,7 +3040,7 @@ function initGame() {
   function drawBall(W, H) {
     const b = ball;
     const sprite = gameAssets.ball.idle;
-    if (drawImageContain(ctx, sprite, b.x - b.r * 1.2, b.y - b.r * 1.2, b.r * 2.4, b.r * 2.4)) {
+    if (drawImageContain(ctx, sprite, b.x - b.r * 1.35, b.y - b.r * 1.35, b.r * 2.7, b.r * 2.7)) {
       return;
     }
     ctx.beginPath();
@@ -3141,7 +3145,7 @@ function initGame() {
             b.y > k.y - k.h * 0.3 && b.y < k.y + k.h) {
           // Saved!
           resultText = 'ОТБИТО!';
-          keeperReaction = '';
+          keeperReaction = 'save';
           lives--;
         } else {
           // GOAL!
@@ -3185,13 +3189,14 @@ function initGame() {
 
     // Recalc sizes on every frame (handles resize)
     goal.w = W * 0.35;
-    goal.h = H * 0.12;
+    goal.h = H * 0.085;
     goal.postW = Math.max(4, W * 0.008);
-    goal.y = H * 0.08;
-    keeper.w = Math.max(30, W * 0.06);
-    keeper.h = Math.max(40, H * 0.08);
-    keeper.y = goal.y + goal.h + 4;
-    ball.r = Math.max(8, W * 0.015);
+    goal.w = W * 0.5;
+    goal.y = H * 0.06;
+    keeper.w = Math.max(26, W * 0.055);
+    keeper.h = Math.max(34, H * 0.07);
+    keeper.y = goal.y + goal.h + 2;
+    ball.r = Math.max(13, W * 0.022);
 
     // Draw field
     drawField(W, H);
@@ -3245,7 +3250,7 @@ function initGame() {
         } else {
           ball.reset();
           ball.x = W / 2;
-          ball.y = H * 0.82;
+          ball.y = H * 0.8;
         }
       }
     }
@@ -3284,7 +3289,7 @@ function initGame() {
 
 <!-- Game Overlay -->
 <div id="gameOverlay" style="display:none; position:fixed; inset:0; z-index:10000; background:#0a1628; flex-direction:column; align-items:center; justify-content:center;">
-  <button onclick="closeMiniGame()" style="position:absolute; top:12px; right:16px; z-index:10001; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); color:#fff; font-size:1.2rem; padding:0.4rem 1rem; border-radius:8px; cursor:pointer; font-family:'General Sans',sans-serif;">✖ Закрыть</button>
+  <button onclick="closeMiniGame()" style="position:absolute; right:14px; bottom:14px; z-index:10001; background:rgba(180,20,20,0.92); border:1px solid rgba(255,255,255,0.18); color:#fff; font-size:0.95rem; padding:0.45rem 0.85rem; border-radius:999px; cursor:pointer; font-family:'General Sans',sans-serif; box-shadow:0 8px 24px rgba(0,0,0,0.35);">Выйти</button>
   <canvas id="gameCanvas" style="width:100%; height:100%; display:block; touch-action:none;"></canvas>
 </div>
 
