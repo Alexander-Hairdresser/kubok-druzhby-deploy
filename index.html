@@ -1,0 +1,3292 @@
+<!DOCTYPE html>
+<!-- v3.2 -->
+<html lang="ru">
+<head>
+<!--
+   ______                            __
+  / ____/___  ____ ___  ____  __  __/ /____  _____
+ / /   / __ \/ __ `__ \/ __ \/ / / / __/ _ \/ ___/
+/ /___/ /_/ / / / / / / /_/ / /_/ / /_/  __/ /
+\____/\____/_/ /_/ /_/ .___/\__,_/\__/\___/_/
+                    /_/
+        Created with Perplexity Computer
+        https://www.perplexity.ai/computer
+-->
+
+<!-- Perplexity Computer Attribution — SEO Meta Tags -->
+<meta name="generator" content="Perplexity Computer">
+<meta name="author" content="Perplexity Computer">
+<meta property="og:see_also" content="https://www.perplexity.ai/computer">
+<link rel="author" href="https://www.perplexity.ai/computer">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>КУБОК ДРУЖБЫ 2026 — Официальный турнирный портал</title>
+<meta name="description" content="Официальный сайт турнира КУБОК ДРУЖБЫ 2026. Расписание матчей, турнирная таблица, информация о командах.">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@200,300,400,500,600,700&f[]=general-sans@200,300,400,500,600,700&display=swap" rel="stylesheet">
+
+<style>
+/* ========== CSS RESET & BASE ========== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+:root {
+  /* Primary Palette */
+  --navy-900: #070e1a;
+  --navy-800: #0a1628;
+  --navy-700: #0f2347;
+  --navy-600: #152d5a;
+  --navy-500: #1a3a6e;
+  --navy-400: #234b8a;
+  --navy-300: #3366aa;
+
+  /* Orange Accents (replacing gold) */
+  --orange-500: #e87a3a;
+  --orange-400: #f08c50;
+  --orange-300: #f5a070;
+  --orange-200: #fbb990;
+  --orange-100: #fdd4b8;
+
+  /* Neutrals */
+  --white: #ffffff;
+  --gray-100: #f0f2f5;
+  --gray-200: #d8dce5;
+  --gray-300: #b0b8c8;
+  --gray-400: #8892a6;
+  --gray-500: #606b82;
+  --gray-600: #3d4660;
+
+  /* Semantic */
+  --success: #2ecc71;
+  --warning: #f39c12;
+  --danger: #e74c3c;
+  --info: #3498db;
+
+  /* Glassmorphism */
+  --glass-bg: rgba(15, 35, 71, 0.6);
+  --glass-border: rgba(232, 122, 58, 0.15);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+
+  /* Typography */
+  --font-display: 'Clash Display', sans-serif;
+  --font-body: 'General Sans', sans-serif;
+
+  /* Spacing */
+  --section-pad: clamp(3rem, 8vw, 6rem);
+  --content-max: 1200px;
+  --card-radius: 16px;
+  --card-radius-sm: 10px;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--navy-900);
+  color: var(--white);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ========== UTILITY ========== */
+.container {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 4vw, 2rem);
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.75rem, 5vw, 2.5rem);
+  color: var(--orange-400);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.25em;
+}
+
+.section-subtitle {
+  font-size: clamp(0.9rem, 2.5vw, 1.05rem);
+  color: var(--gray-400);
+  margin-bottom: 2.5rem;
+}
+
+.orange-line {
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--orange-500), var(--orange-300));
+  border-radius: 2px;
+  margin-bottom: 1rem;
+}
+
+/* ========== FLOATING BALL MENU ========== */
+.menu-ball {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 2000;
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 38% 32%, #c8956a, #a06b3e 40%, #7a4f2a 70%, #5a3a1e);
+  border: 2px solid rgba(160, 107, 62, 0.6);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(90, 58, 30, 0.5), inset 0 2px 4px rgba(255,220,180,0.25), inset 0 -2px 4px rgba(0,0,0,0.3);
+  transition: transform 0.2s, box-shadow 0.2s;
+  animation: ballPulse 3s ease-in-out infinite;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+.menu-ball::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 22%, rgba(255,220,180,0.3), transparent 45%);
+  pointer-events: none;
+}
+
+/* Retro ball stitching line */
+.menu-ball::after {
+  content: '';
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1.5px dashed rgba(90, 58, 30, 0.5);
+  pointer-events: none;
+}
+
+.menu-ball-svg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.menu-ball-text {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.5rem;
+  color: rgba(255,240,220,0.9);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  z-index: 2;
+  pointer-events: none;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+}
+
+.menu-ball:active {
+  transform: scale(0.92);
+}
+
+.menu-ball.open {
+  animation: none;
+  transform: scale(1.05);
+  box-shadow: 0 4px 28px rgba(160, 107, 62, 0.6), inset 0 2px 4px rgba(255,220,180,0.3), inset 0 -2px 4px rgba(0,0,0,0.3);
+  border-color: rgba(200, 149, 106, 0.8);
+}
+
+@keyframes ballPulse {
+  0%, 100% { box-shadow: 0 4px 20px rgba(90, 58, 30, 0.5), inset 0 2px 4px rgba(255,220,180,0.25), inset 0 -2px 4px rgba(0,0,0,0.3); }
+  50% { box-shadow: 0 4px 28px rgba(160, 107, 62, 0.6), inset 0 2px 4px rgba(255,220,180,0.35), inset 0 -2px 4px rgba(0,0,0,0.25); }
+}
+
+/* Floating menu panel */
+.menu-panel {
+  position: fixed;
+  bottom: 5.5rem;
+  right: 1.5rem;
+  z-index: 1999;
+  background: rgba(10, 22, 40, 0.95);
+  border: 1px solid rgba(232, 122, 58, 0.2);
+  border-radius: 16px;
+  padding: 0.75rem 0;
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+  min-width: 180px;
+  transform: scale(0.8) translateY(10px);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.2s;
+  transform-origin: bottom right;
+}
+
+.menu-panel.open {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.menu-panel a {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.65rem 1.25rem;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 0.82rem;
+  color: var(--gray-300);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  transition: background 0.15s, color 0.15s;
+}
+
+.menu-panel a:hover,
+.menu-panel a:active {
+  background: rgba(232, 122, 58, 0.1);
+  color: var(--orange-400);
+}
+
+.menu-panel a .menu-icon {
+  font-size: 1rem;
+  width: 1.2rem;
+  text-align: center;
+}
+
+/* ========== HERO ========== */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero-bg svg {
+  width: 100%;
+  height: 100%;
+}
+
+.hero-gradient {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 40%, rgba(15, 35, 71, 0.3) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 50% at 50% 50%, rgba(232, 122, 58, 0.06) 0%, transparent 60%),
+    linear-gradient(180deg, rgba(7, 14, 26, 0.2) 0%, rgba(7, 14, 26, 0.8) 100%);
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+}
+
+.hero-emblem {
+  width: clamp(120px, 25vw, 180px);
+  height: auto;
+  margin-bottom: 1.5rem;
+  filter: drop-shadow(0 0 40px rgba(232, 122, 58, 0.3));
+  animation: emblemFloat 6s ease-in-out infinite;
+}
+
+@keyframes emblemFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+.hero-pretitle {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(0.75rem, 2vw, 0.9rem);
+  color: var(--orange-300);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  line-height: 1.05;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  background: linear-gradient(180deg, var(--orange-100) 0%, var(--orange-400) 50%, var(--orange-500) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.5rem;
+}
+
+.hero-year {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  color: var(--white);
+  opacity: 0.4;
+  letter-spacing: 0.2em;
+  margin-bottom: 1.5rem;
+}
+
+.hero-meta {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.hero-meta-item {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--gray-300);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.hero-meta-item svg {
+  width: 16px;
+  height: 16px;
+  color: var(--orange-400);
+}
+
+.hero-scroll {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  animation: scrollBounce 2s ease-in-out infinite;
+}
+
+.hero-scroll svg {
+  width: 24px;
+  height: 24px;
+  color: var(--orange-400);
+  opacity: 0.6;
+}
+
+@keyframes scrollBounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(8px); }
+}
+
+/* ========== SECTIONS ========== */
+section {
+  padding: var(--section-pad) 0;
+}
+
+.section-header {
+  margin-bottom: 2.5rem;
+}
+
+/* ========== LIGHT BEAM HOVER EFFECT ========== */
+.light-beam {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.light-beam::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent 0%, transparent 30%, rgba(255,255,255,0.15) 45%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0.15) 55%, transparent 70%, transparent 100%);
+  transform: translateX(-100%);
+  transition: none;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.light-beam:hover::after {
+  animation: lightBeamSweep 0.6s ease-in-out forwards;
+}
+
+@keyframes lightBeamSweep {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* ========== REGULATIONS BUTTONS ========== */
+.regulations-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.reg-btn {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  background: linear-gradient(135deg, rgba(34, 120, 70, 0.25), rgba(46, 160, 90, 0.15));
+  border: 1.5px solid rgba(46, 180, 90, 0.35);
+  border-radius: var(--card-radius);
+  padding: 1rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  transition: border-color 0.3s, box-shadow 0.3s, background 0.3s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.reg-btn:hover {
+  border-color: rgba(46, 200, 100, 0.6);
+  box-shadow: 0 4px 24px rgba(46, 180, 90, 0.2);
+  background: linear-gradient(135deg, rgba(34, 120, 70, 0.35), rgba(46, 160, 90, 0.25));
+}
+
+/* Green light beam effect */
+.reg-btn::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(120deg, transparent 0%, transparent 30%, rgba(120,255,160,0.2) 45%, rgba(150,255,180,0.35) 50%, rgba(120,255,160,0.2) 55%, transparent 70%, transparent 100%);
+  transform: translateX(-100%);
+  transition: none;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.reg-btn:hover::after {
+  animation: lightBeamSweep 0.6s ease-in-out forwards;
+}
+
+.reg-btn-icon {
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+.reg-btn-text {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: rgba(150, 255, 180, 0.9);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  line-height: 1.3;
+}
+
+.reg-btn .chevron {
+  width: 16px; height: 16px;
+  margin-left: auto;
+  color: rgba(150, 255, 180, 0.5);
+  flex-shrink: 0;
+  transition: transform 0.3s;
+}
+
+.reg-btn.open .chevron {
+  transform: rotate(180deg);
+}
+
+/* Regulation content panel */
+.reg-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, margin 0.3s;
+  margin-top: 0;
+}
+
+.reg-content.open {
+  max-height: 2000px;
+  margin-top: 1rem;
+}
+
+.reg-content-inner {
+  background: linear-gradient(135deg, rgba(34, 120, 70, 0.12), rgba(15, 35, 71, 0.4));
+  border: 1px solid rgba(46, 180, 90, 0.2);
+  border-radius: var(--card-radius);
+  padding: 1.5rem;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--gray-200);
+}
+
+.reg-content-inner h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1rem;
+  color: rgba(150, 255, 180, 0.9);
+  margin-bottom: 0.75rem;
+}
+
+.reg-content-inner p {
+  margin-bottom: 0.75rem;
+}
+
+.reg-content-inner ul, .reg-content-inner ol {
+  margin-left: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.reg-content-inner li {
+  margin-bottom: 0.35rem;
+}
+
+@media (max-width: 480px) {
+  .regulations-row {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .reg-btn {
+    padding: 0.85rem 1rem;
+  }
+  .reg-content.open {
+    max-height: 5000px;
+  }
+}
+
+/* ========== STANDINGS TABLE ========== */
+.standings-wrapper {
+  overflow-x: auto;
+  border-radius: var(--card-radius);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.standings-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 640px;
+  font-variant-numeric: tabular-nums;
+}
+
+.standings-table thead {
+  background: rgba(232, 122, 58, 0.1);
+}
+
+.standings-table th {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--orange-400);
+  padding: 1rem 0.75rem;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.standings-table th:nth-child(2) {
+  text-align: left;
+}
+
+.standings-table td {
+  padding: 0.85rem 0.75rem;
+  text-align: center;
+  font-size: 0.9rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  color: var(--gray-200);
+}
+
+.standings-table td:nth-child(2) {
+  text-align: left;
+  font-weight: 600;
+  color: var(--white);
+}
+
+.standings-table tbody tr {
+  transition: background 0.2s;
+}
+
+.standings-table tbody tr:hover {
+  background: rgba(232, 122, 58, 0.05);
+}
+
+.standings-table tbody tr:nth-child(1) td:first-child,
+.standings-table tbody tr:nth-child(2) td:first-child,
+.standings-table tbody tr:nth-child(3) td:first-child {
+  position: relative;
+}
+
+.standings-table tbody tr:nth-child(1) td:first-child::before,
+.standings-table tbody tr:nth-child(2) td:first-child::before,
+.standings-table tbody tr:nth-child(3) td:first-child::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 15%;
+  height: 70%;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+}
+
+.standings-table tbody tr:nth-child(1) td:first-child::before {
+  background: var(--orange-400);
+}
+.standings-table tbody tr:nth-child(2) td:first-child::before {
+  background: var(--orange-500);
+}
+.standings-table tbody tr:nth-child(3) td:first-child::before {
+  background: rgba(232, 122, 58, 0.4);
+}
+
+.standings-table .rank {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--orange-300);
+}
+
+.standings-table .points {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--orange-400);
+}
+
+/* ========== SCHEDULE ========== */
+.schedule-grid {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.match-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--card-radius-sm);
+  padding: 0.85rem 1.25rem;
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  align-items: center;
+  gap: 0.75rem;
+  transition: transform 0.2s, border-color 0.2s;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.match-card:hover {
+  transform: translateY(-1px);
+  border-color: rgba(232, 122, 58, 0.3);
+}
+
+.match-number {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.7rem;
+  color: var(--navy-800);
+  background: var(--orange-400);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.match-body {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.match-team {
+  flex: 1;
+  min-width: 0;
+}
+
+.match-team .team-name {
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: var(--white);
+  display: block;
+}
+
+.match-team.away {
+  text-align: right;
+}
+
+/* Score area */
+.match-score {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 10;
+}
+
+.score-input {
+  width: 28px;
+  height: 28px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 5px;
+  text-align: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.25);
+  cursor: pointer;
+  transition: all 0.2s;
+  -moz-appearance: textfield;
+  padding: 0;
+}
+
+.score-input::-webkit-outer-spin-button,
+.score-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.score-input:focus {
+  outline: none;
+  border-color: var(--orange-400);
+  background: rgba(232, 122, 58, 0.1);
+  color: var(--orange-300);
+  box-shadow: 0 0 8px rgba(232, 122, 58, 0.2);
+}
+
+.score-input.has-value {
+  color: var(--white);
+  background: rgba(232, 122, 58, 0.12);
+  border-color: rgba(232, 122, 58, 0.25);
+}
+
+.score-divider {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.2);
+  user-select: none;
+}
+
+.match-time {
+  text-align: right;
+}
+
+.match-time .time {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--orange-300);
+}
+
+.match-time .status {
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--gray-400);
+  margin-top: 0.1rem;
+}
+
+.round-header {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: var(--orange-400);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  padding: 1.5rem 0 0.5rem;
+  border-bottom: 1px solid rgba(232, 122, 58, 0.15);
+  margin-bottom: 0.25rem;
+}
+
+.round-header:first-child {
+  padding-top: 0;
+}
+
+@media (max-width: 640px) {
+  .match-card {
+    grid-template-columns: auto 1fr;
+    gap: 0.5rem 0.75rem;
+    padding: 0.75rem 1rem;
+  }
+  .match-body {
+    gap: 0.35rem;
+  }
+  .match-team .team-name {
+    font-size: 0.78rem;
+  }
+  .score-input {
+    width: 24px;
+    height: 24px;
+    font-size: 0.75rem;
+  }
+  .match-time {
+    grid-column: 1 / -1;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+}
+
+/* ========== TEAMS ========== */
+.teams-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.team-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--card-radius);
+  padding: 1.5rem;
+  text-align: center;
+  transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  position: relative;
+  overflow: hidden;
+}
+
+.team-card-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  border-radius: var(--card-radius) var(--card-radius) 0 0;
+}
+
+.team-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(232, 122, 58, 0.3);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+
+.team-badge {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 1rem;
+  display: block;
+}
+
+.team-card .team-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--white);
+  margin-bottom: 0.25rem;
+}
+
+.team-card .team-city {
+  font-size: 0.8rem;
+  color: var(--gray-400);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+}
+
+.team-expand-hint {
+  font-size: 0.7rem;
+  color: var(--gray-500);
+  transition: color 0.2s;
+}
+
+.team-card:hover .team-expand-hint {
+  color: var(--orange-300);
+}
+
+/* Team roster expansion */
+.team-roster {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.4s ease;
+  padding: 0;
+}
+
+.team-card.expanded .team-roster {
+  max-height: 600px;
+  padding-top: 1rem;
+}
+
+.team-card.expanded .team-expand-hint {
+  display: none;
+}
+
+.roster-section-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 0.5rem;
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+.roster-section-title.field {
+  color: var(--orange-400);
+}
+
+.roster-section-title.bench {
+  color: var(--gray-500);
+}
+
+.roster-player {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0;
+  font-size: 0.82rem;
+}
+
+.player-frame {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.6rem;
+  flex-shrink: 0;
+}
+
+.player-frame.field-frame {
+  border-color: var(--orange-400);
+  color: var(--orange-300);
+  background: rgba(232, 122, 58, 0.1);
+}
+
+.player-frame.bench-frame {
+  border-color: var(--gray-600);
+  color: var(--gray-500);
+  background: rgba(61, 70, 96, 0.2);
+}
+
+.player-role {
+  color: var(--gray-400);
+  font-size: 0.75rem;
+  font-style: italic;
+}
+
+.player-name-empty {
+  color: var(--gray-600);
+  font-size: 0.78rem;
+}
+
+.player-name-input {
+  flex: 1;
+  min-width: 0;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 4px;
+  padding: 0.25rem 0.5rem;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.2);
+  cursor: pointer;
+  transition: all 0.2s;
+  outline: none;
+}
+
+.player-name-input::placeholder {
+  color: rgba(255,255,255,0.15);
+}
+
+.player-name-input:focus {
+  border-color: var(--orange-400);
+  background: rgba(232, 122, 58, 0.08);
+  color: var(--orange-300);
+  box-shadow: 0 0 8px rgba(232, 122, 58, 0.15);
+}
+
+.player-name-input.has-name {
+  color: var(--white);
+  background: rgba(255,255,255,0.05);
+  border-color: rgba(255,255,255,0.1);
+}
+
+/* ========== JUDGES SECTION ========== */
+.judges-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: 700px;
+}
+
+.judge-panel {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--card-radius-sm);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.judge-panel-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  transition: background 0.2s;
+}
+
+.judge-panel-header:hover {
+  background: rgba(232, 122, 58, 0.05);
+}
+
+.judge-panel-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(232, 122, 58, 0.12);
+  border: 1.5px solid rgba(232, 122, 58, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.judge-panel-icon svg {
+  width: 18px;
+  height: 18px;
+  color: var(--orange-400);
+}
+
+.judge-panel-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--white);
+  flex: 1;
+}
+
+.judge-panel-status {
+  font-size: 0.75rem;
+  color: var(--gray-500);
+  font-style: italic;
+}
+
+.judge-panel .chevron {
+  width: 18px;
+  height: 18px;
+  color: var(--gray-500);
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+.judge-panel.open .chevron {
+  transform: rotate(180deg);
+}
+
+.judge-panel-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+}
+
+.judge-panel.open .judge-panel-body {
+  max-height: 500px;
+}
+
+.judge-panel-content {
+  padding: 0 1.25rem 1rem;
+}
+
+.judge-person {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+.judge-person:last-child {
+  border-bottom: none;
+}
+
+.judge-person-num {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(232, 122, 58, 0.12);
+  border: 1.5px solid rgba(232, 122, 58, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--orange-400);
+  flex-shrink: 0;
+}
+
+.judge-person-num.muted {
+  background: rgba(255,255,255,0.04);
+  border-color: rgba(255,255,255,0.1);
+  color: var(--gray-500);
+}
+
+.judge-person-role {
+  font-size: 0.8rem;
+  color: var(--gray-400);
+}
+
+.judge-person-name {
+  font-size: 0.8rem;
+  color: var(--gray-600);
+  margin-left: auto;
+  font-style: italic;
+}
+
+.judge-name-input {
+  flex: 1;
+  min-width: 0;
+  max-width: 160px;
+  margin-left: auto;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 4px;
+  padding: 0.25rem 0.5rem;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.2);
+  cursor: pointer;
+  transition: all 0.2s;
+  outline: none;
+}
+
+.judge-name-input::placeholder {
+  color: rgba(255,255,255,0.15);
+}
+
+.judge-name-input:focus {
+  border-color: var(--orange-400);
+  background: rgba(232, 122, 58, 0.08);
+  color: var(--orange-300);
+  box-shadow: 0 0 8px rgba(232, 122, 58, 0.15);
+}
+
+.judge-name-input.has-name {
+  color: var(--white);
+  background: rgba(255,255,255,0.05);
+  border-color: rgba(255,255,255,0.1);
+  font-style: normal;
+}
+
+/* ========== ORGANIZATION ========== */
+.org-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1rem;
+}
+
+.org-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--card-radius-sm);
+  overflow: hidden;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.org-card-header {
+  padding: 1rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.2s;
+}
+
+.org-card-header:hover {
+  background: rgba(232, 122, 58, 0.05);
+}
+
+.org-card-header h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--orange-300);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.org-card-header .chevron {
+  width: 20px;
+  height: 20px;
+  color: var(--gray-400);
+  transition: transform 0.3s;
+}
+
+.org-card.open .chevron {
+  transform: rotate(180deg);
+}
+
+.org-card-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+
+.org-card.open .org-card-body {
+  max-height: 500px;
+}
+
+.org-task {
+  padding: 0.6rem 1.25rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.03);
+  font-size: 0.85rem;
+}
+
+.org-task .checkbox {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  border: 2px solid var(--gray-500);
+  flex-shrink: 0;
+  margin-top: 2px;
+  cursor: pointer;
+  transition: 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.org-task .checkbox.checked {
+  background: var(--orange-500);
+  border-color: var(--orange-500);
+}
+
+.org-task .checkbox.checked::after {
+  content: '✓';
+  color: var(--navy-800);
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.org-task .task-text {
+  flex: 1;
+  color: var(--gray-200);
+}
+
+.org-task .task-person {
+  font-size: 0.75rem;
+  color: var(--orange-400);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* ========== BUDGET ========== */
+.budget-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  margin-top: 2rem;
+}
+
+.budget-card-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--orange-300);
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.budget-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.budget-table th {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--orange-400);
+  padding: 0.75rem 1.5rem;
+  text-align: left;
+  background: rgba(232, 122, 58, 0.05);
+}
+
+.budget-table th:not(:first-child) {
+  text-align: center;
+}
+
+.budget-table td {
+  padding: 0.7rem 1.5rem;
+  font-size: 0.85rem;
+  color: var(--gray-200);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.budget-table td:not(:first-child) {
+  text-align: center;
+  color: var(--gray-400);
+}
+
+.budget-input {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 6px;
+  color: var(--gray-300);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  padding: 0.4rem 0.5rem;
+  width: 90px;
+  text-align: center;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+.budget-input::placeholder {
+  color: var(--gray-600);
+  font-size: 0.8rem;
+}
+.budget-input:hover {
+  border-color: rgba(232, 122, 58, 0.3);
+  background: rgba(232, 122, 58, 0.04);
+}
+.budget-input:focus {
+  border-color: var(--orange-500);
+  background: rgba(232, 122, 58, 0.08);
+  box-shadow: 0 0 0 2px rgba(232, 122, 58, 0.15);
+}
+.budget-input.has-value {
+  color: var(--orange-300);
+  border-color: rgba(232, 122, 58, 0.25);
+}
+.budget-total-row td {
+  font-weight: 700;
+  font-family: var(--font-display);
+  color: var(--orange-400) !important;
+  border-top: 2px solid rgba(232, 122, 58, 0.2);
+  padding-top: 0.9rem;
+}
+
+/* ========== VENUE WIDGET ========== */
+.venue-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  margin-top: 2rem;
+}
+.venue-card-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--glass-border);
+}
+.venue-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: rgba(232, 122, 58, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+.venue-info h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--orange-300);
+  margin-bottom: 0.2rem;
+}
+.venue-info p {
+  font-size: 0.82rem;
+  color: var(--gray-400);
+  line-height: 1.4;
+}
+.venue-map-container {
+  position: relative;
+  width: 100%;
+  height: 250px;
+  border-top: 1px solid var(--glass-border);
+}
+.venue-map-container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  filter: saturate(0.7) brightness(0.85) contrast(1.1);
+}
+.venue-link-row {
+  padding: 0.8rem 1.5rem;
+  border-top: 1px solid var(--glass-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.venue-link-row a {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--orange-400);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: color 0.2s;
+}
+.venue-link-row a:hover {
+  color: var(--orange-300);
+}
+
+/* ========== INFO SECTION ========== */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.info-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--card-radius-sm);
+  padding: 1.25rem;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  text-align: center;
+}
+
+.info-card .info-value {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--orange-400);
+  margin-bottom: 0.25rem;
+}
+
+.info-card .info-label {
+  font-size: 0.8rem;
+  color: var(--gray-400);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* ========== FOOTER ========== */
+.footer {
+  padding: 2.5rem 0;
+  border-top: 1px solid var(--glass-border);
+  text-align: center;
+}
+
+.footer-brand {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--orange-400);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.footer-text {
+  font-size: 0.8rem;
+  color: var(--gray-500);
+  margin-bottom: 0.75rem;
+}
+
+.footer a {
+  color: var(--gray-400);
+  text-decoration: none;
+  font-size: 0.75rem;
+  transition: color 0.2s;
+}
+
+.footer a:hover {
+  color: var(--orange-400);
+}
+
+/* ========== SCROLLBAR ========== */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--navy-900); }
+::-webkit-scrollbar-thumb { background: var(--navy-600); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--navy-500); }
+
+/* ========== RESPONSIVE TWEAKS ========== */
+@media (max-width: 480px) {
+  .teams-grid { grid-template-columns: 1fr 1fr; }
+  .org-grid { grid-template-columns: 1fr; }
+  .info-grid { grid-template-columns: 1fr 1fr; }
+  .judges-grid { grid-template-columns: 1fr 1fr; }
+  .hero-meta { gap: 1rem; }
+}
+
+@media (max-width: 360px) {
+  .teams-grid { grid-template-columns: 1fr; }
+  .info-grid { grid-template-columns: 1fr; }
+  .judges-grid { grid-template-columns: 1fr; }
+}
+
+/* Mobile expanded team card — full width */
+@media (max-width: 768px) {
+  .team-card.expanded {
+    grid-column: 1 / -1;
+  }
+  .team-card.expanded .player-name-input {
+    min-width: 100px;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ====== FLOATING BALL MENU ====== -->
+<div class="menu-ball" id="menuBall" onclick="toggleBallMenu()">
+  <svg class="menu-ball-svg" viewBox="0 0 62 62" xmlns="http://www.w3.org/2000/svg">
+    <!-- Retro stitching seam (vertical) -->
+    <path d="M31 6 Q33 15 31 22 Q29 29 31 36 Q33 43 31 50 Q29 54 31 56" fill="none" stroke="rgba(90,58,30,0.45)" stroke-width="1.2" stroke-dasharray="3 2"/>
+    <!-- Cross stitch marks along seam -->
+    <line x1="29" y1="12" x2="33" y2="14" stroke="rgba(90,58,30,0.35)" stroke-width="0.8"/>
+    <line x1="33" y1="18" x2="29" y2="20" stroke="rgba(90,58,30,0.35)" stroke-width="0.8"/>
+    <line x1="29" y1="26" x2="33" y2="28" stroke="rgba(90,58,30,0.35)" stroke-width="0.8"/>
+    <line x1="33" y1="34" x2="29" y2="36" stroke="rgba(90,58,30,0.35)" stroke-width="0.8"/>
+    <line x1="29" y1="42" x2="33" y2="44" stroke="rgba(90,58,30,0.35)" stroke-width="0.8"/>
+    <line x1="33" y1="48" x2="29" y2="50" stroke="rgba(90,58,30,0.35)" stroke-width="0.8"/>
+    <!-- Valve circle -->
+    <circle cx="44" cy="20" r="3" fill="none" stroke="rgba(90,58,30,0.4)" stroke-width="0.8"/>
+    <circle cx="44" cy="20" r="1" fill="rgba(90,58,30,0.3)"/>
+  </svg>
+  <span class="menu-ball-text">меню</span>
+</div>
+<div class="menu-panel" id="menuPanel">
+  <a href="#standings" onclick="closeBallMenu()"><span class="menu-icon">📊</span> Таблица</a>
+  <a href="#regulations" onclick="closeBallMenu()"><span class="menu-icon">📜</span> Регламент</a>
+  <a href="#schedule" onclick="closeBallMenu()"><span class="menu-icon">📅</span> Расписание</a>
+  <a href="#teams" onclick="closeBallMenu()"><span class="menu-icon">👥</span> Команды</a>
+  <a href="#judges" onclick="closeBallMenu()"><span class="menu-icon">⚖️</span> Судьи</a>
+  <a href="#organization" onclick="closeBallMenu()"><span class="menu-icon">📋</span> Организация</a>
+  <a href="javascript:void(0)" onclick="closeBallMenu();openMiniGame()"><span class="menu-icon">🎮</span> Мини-игра</a>
+</div>
+
+<!-- ====== HERO ====== -->
+<section class="hero" id="hero">
+  <div class="hero-bg">
+    <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="heroGlow" cx="50%" cy="40%" r="60%">
+          <stop offset="0%" style="stop-color:#152d5a;stop-opacity:0.6"/>
+          <stop offset="100%" style="stop-color:#070e1a;stop-opacity:1"/>
+        </radialGradient>
+        <pattern id="hexGrid" x="0" y="0" width="60" height="52" patternUnits="userSpaceOnUse" patternTransform="rotate(15)">
+          <polygon points="30,2 54,15 54,37 30,50 6,37 6,15" fill="none" stroke="rgba(232,122,58,0.04)" stroke-width="0.5"/>
+        </pattern>
+        <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color:rgba(232,122,58,0);"/>
+          <stop offset="50%" style="stop-color:rgba(232,122,58,0.15);"/>
+          <stop offset="100%" style="stop-color:rgba(232,122,58,0);"/>
+        </linearGradient>
+      </defs>
+      <rect fill="url(#heroGlow)" width="1440" height="900"/>
+      <rect fill="url(#hexGrid)" width="1440" height="900"/>
+      <line x1="0" y1="300" x2="1440" y2="300" stroke="url(#lineGrad)" stroke-width="0.5"/>
+      <line x1="0" y1="600" x2="1440" y2="600" stroke="url(#lineGrad)" stroke-width="0.5"/>
+      <line x1="200" y1="0" x2="500" y2="900" stroke="rgba(232,122,58,0.03)" stroke-width="1"/>
+      <line x1="940" y1="0" x2="1240" y2="900" stroke="rgba(232,122,58,0.03)" stroke-width="1"/>
+      <circle cx="720" cy="450" r="200" fill="none" stroke="rgba(232,122,58,0.04)" stroke-width="0.5"/>
+      <circle cx="720" cy="450" r="300" fill="none" stroke="rgba(232,122,58,0.025)" stroke-width="0.5"/>
+      <circle cx="720" cy="450" r="400" fill="none" stroke="rgba(232,122,58,0.015)" stroke-width="0.5"/>
+    </svg>
+  </div>
+  <div class="hero-gradient"></div>
+
+  <div class="hero-content">
+    <!-- Tournament Emblem SVG -->
+    <svg class="hero-emblem" viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg" aria-label="Эмблема турнира Кубок Дружбы 2026 — Смоленск">
+      <defs>
+        <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" style="stop-color:#f5a070"/>
+          <stop offset="100%" style="stop-color:#e87a3a"/>
+        </linearGradient>
+        <linearGradient id="shieldInner" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" style="stop-color:#0f2347"/>
+          <stop offset="100%" style="stop-color:#0a1628"/>
+        </linearGradient>
+        <linearGradient id="ballGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#fbb990"/>
+          <stop offset="100%" style="stop-color:#e87a3a"/>
+        </linearGradient>
+      </defs>
+      <!-- Shield outer -->
+      <path d="M100 8 L185 50 L185 140 Q185 195 100 232 Q15 195 15 140 L15 50 Z" fill="url(#shieldGrad)" stroke="none"/>
+      <!-- Shield inner -->
+      <path d="M100 18 L177 56 L177 140 Q177 190 100 224 Q23 190 23 140 L23 56 Z" fill="url(#shieldInner)" stroke="none"/>
+      <!-- Orange inner border -->
+      <path d="M100 26 L170 61 L170 140 Q170 185 100 217 Q30 185 30 140 L30 61 Z" fill="none" stroke="url(#shieldGrad)" stroke-width="0.8" opacity="0.35"/>
+
+      <!-- === Smolensk Fortress Wall silhouette === -->
+      <g stroke="url(#ballGrad)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <!-- Main wall base line -->
+        <path d="M42 130 L42 108 L50 108 L50 100 L56 100 L56 108 L64 108 L64 130" stroke-width="1.5" opacity="0.6"/>
+        <!-- Left wall crenellations (merlons) -->
+        <path d="M42 130 L42 125 M46 125 L46 130 M50 130 L50 125 M54 125 L54 130 M58 130 L58 125 M62 125 L62 130" stroke-width="1" opacity="0.35"/>
+        
+        <!-- CENTER TOWER (taller, prominent) -->
+        <path d="M82 130 L82 78 L88 78 L88 70 L94 70 L94 65 L100 62 L106 65 L106 70 L112 70 L112 78 L118 78 L118 130" stroke-width="1.8"/>
+        <!-- Tower pointed roof tip -->
+        <path d="M100 62 L100 55" stroke-width="1.5"/>
+        <circle cx="100" cy="53" r="2" fill="#e87a3a" opacity="0.8"/>
+        <!-- Tower brick pattern (horizontal lines) -->
+        <path d="M86 85 L114 85 M84 92 L116 92 M83 100 L117 100 M82 108 L118 108 M82 116 L118 116 M82 124 L118 124" stroke-width="0.6" opacity="0.25"/>
+        <!-- Tower vertical brick joints -->
+        <path d="M92 78 L92 130 M100 70 L100 130 M108 78 L108 130" stroke-width="0.4" opacity="0.15"/>
+        <!-- Tower arch window -->
+        <path d="M95 88 Q100 82 105 88 L105 96 L95 96 Z" fill="none" stroke-width="1.2" opacity="0.7"/>
+
+        <!-- Right wall section -->
+        <path d="M136 130 L136 108 L144 108 L144 100 L150 100 L150 108 L158 108 L158 130" stroke-width="1.5" opacity="0.6"/>
+        <!-- Right wall crenellations -->
+        <path d="M138 130 L138 125 M142 125 L142 130 M146 130 L146 125 M150 125 L150 130 M154 130 L154 125 M158 125 L158 130" stroke-width="1" opacity="0.35"/>
+
+        <!-- Connecting walls -->
+        <path d="M64 130 L64 120 L82 120 L82 130" stroke-width="1" opacity="0.4"/>
+        <path d="M118 130 L118 120 L136 120 L136 130" stroke-width="1" opacity="0.4"/>
+      </g>
+
+      <!-- === Football (soccer ball) — inside tower arch area === -->
+      <g transform="translate(100, 148)">
+        <circle cx="0" cy="0" r="14" fill="none" stroke="url(#ballGrad)" stroke-width="1.5"/>
+        <polygon points="0,-6 5.7,-1.8 3.5,4.8 -3.5,4.8 -5.7,-1.8" fill="none" stroke="url(#ballGrad)" stroke-width="0.8" opacity="0.7"/>
+        <!-- Ball panel lines -->
+        <path d="M0,-14 L0,-6 M-13.3,4.3 L-5.7,-1.8 M13.3,4.3 L5.7,-1.8 M-8.2,11.3 L-3.5,4.8 M8.2,11.3 L3.5,4.8" stroke="url(#ballGrad)" stroke-width="0.7" opacity="0.5"/>
+      </g>
+
+      <!-- === Ground line === -->
+      <line x1="35" y1="170" x2="165" y2="170" stroke="url(#shieldGrad)" stroke-width="0.6" opacity="0.3"/>
+
+      <!-- === Year 2026 === -->
+      <text x="100" y="190" text-anchor="middle" font-family="'Clash Display', sans-serif" font-weight="700" font-size="16" fill="#e87a3a" letter-spacing="0.2em">2026</text>
+
+      <!-- === Subtle stars flanking the tower top === -->
+      <g fill="#e87a3a" opacity="0.5">
+        <polygon points="65,68 67,73 72,73 68,76 69,81 65,78 61,81 62,76 58,73 63,73"/>
+        <polygon points="135,68 137,73 142,73 138,76 139,81 135,78 131,81 132,76 128,73 133,73"/>
+      </g>
+    </svg>
+
+    <div class="hero-pretitle">Официальный турнир</div>
+    <h1 class="hero-title">Кубок Дружбы</h1>
+    <div class="hero-year">2026</div>
+
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Апрель 2026
+      </div>
+      <div class="hero-meta-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        6 команд
+      </div>
+      <div class="hero-meta-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        15 матчей
+      </div>
+      <div class="hero-meta-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        Круговой турнир
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+  </div>
+</section>
+
+<!-- ====== STANDINGS ====== -->
+<section id="standings">
+  <div class="container">
+
+    <!-- Regulation Buttons -->
+    <div class="regulations-row" id="regulations">
+      <div class="reg-btn" onclick="toggleReg('tournament')">
+        <span class="reg-btn-icon">🏆</span>
+        <span class="reg-btn-text">Регламент Турнира</span>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="reg-btn" onclick="toggleReg('judges')">
+        <span class="reg-btn-icon">📜</span>
+        <span class="reg-btn-text">Регламент Судейства</span>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+    </div>
+
+    <!-- Tournament Regulation Content -->
+    <div class="reg-content" id="regTournament">
+      <div class="reg-content-inner">
+        <h4>🏆 Регламент Турнира</h4>
+        <p>Текст регламента турнира будет добавлен позже.</p>
+      </div>
+    </div>
+
+    <!-- Judging Regulation Content -->
+    <div class="reg-content" id="regJudges">
+      <div class="reg-content-inner">
+        <h4>📜 Регламент Судейства</h4>
+        <p>Текст регламента судейства будет добавлен позже.</p>
+      </div>
+    </div>
+
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="info-value">6</div>
+        <div class="info-label">Команд</div>
+      </div>
+      <div class="info-card">
+        <div class="info-value">15</div>
+        <div class="info-label">Матчей</div>
+      </div>
+      <div class="info-card">
+        <div class="info-value">12 мин</div>
+        <div class="info-label">Длительность</div>
+      </div>
+      <div class="info-card">
+        <div class="info-value">14:00</div>
+        <div class="info-label">Начало</div>
+      </div>
+    </div>
+
+    <div class="section-header">
+      <div class="orange-line"></div>
+      <h2 class="section-title">Турнирная таблица</h2>
+      <p class="section-subtitle">Текущее положение команд в турнире</p>
+    </div>
+
+    <div class="standings-wrapper" id="standingsTable">
+      <!-- Filled by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ====== SCHEDULE ====== -->
+<section id="schedule">
+  <div class="container">
+    <div class="section-header">
+      <div class="orange-line"></div>
+      <h2 class="section-title">Расписание матчей</h2>
+      <p class="section-subtitle">Полное расписание всех 15 матчей кругового турнира</p>
+    </div>
+    <div class="schedule-grid" id="scheduleGrid">
+      <!-- Filled by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ====== TEAMS ====== -->
+<section id="teams">
+  <div class="container">
+    <div class="section-header">
+      <div class="orange-line"></div>
+      <h2 class="section-title">Команды</h2>
+      <p class="section-subtitle">6 команд-участниц турнира · Нажмите на карточку для просмотра состава</p>
+    </div>
+    <div class="teams-grid" id="teamsGrid">
+      <!-- Filled by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ====== JUDGES ====== -->
+<section id="judges">
+  <div class="container">
+    <div class="section-header">
+      <div class="orange-line"></div>
+      <h2 class="section-title">Судьи</h2>
+      <p class="section-subtitle">Судейская бригада турнира</p>
+    </div>
+    <div class="judges-list" id="judgesGrid">
+      <!-- Filled by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ====== ORGANIZATION ====== -->
+<section id="organization">
+  <div class="container">
+    <div class="section-header">
+      <div class="orange-line"></div>
+      <h2 class="section-title">Организация</h2>
+      <p class="section-subtitle">Задачи и ответственные за подготовку турнира</p>
+    </div>
+    <div class="org-grid" id="orgGrid">
+      <!-- Filled by JS -->
+    </div>
+
+    <!-- Budget -->
+    <div class="budget-card">
+      <div class="budget-card-title">💰 Бюджет турнира</div>
+      <table class="budget-table">
+        <thead>
+          <tr>
+            <th>Категория</th>
+            <th>Планируемо</th>
+            <th>Факт</th>
+          </tr>
+        </thead>
+        <tbody id="budgetBody">
+          <!-- Filled by JS -->
+        </tbody>
+        <tfoot>
+          <tr class="budget-total-row">
+            <td>ИТОГО</td>
+            <td id="budgetTotalPlan">0 ₽</td>
+            <td id="budgetTotalFact">0 ₽</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <!-- Venue -->
+    <div class="venue-card">
+      <div class="venue-card-header">
+        <div class="venue-icon">🏟️</div>
+        <div class="venue-info">
+          <h3>Место проведения</h3>
+          <p>Манеж № 1 · ул. Посёлок Тихвинка, 19Е · Смоленск</p>
+        </div>
+      </div>
+      <div class="venue-map-container">
+        <iframe src="https://yandex.ru/map-widget/v1/?ll=32.076261%2C54.755986&z=16&pt=32.076261%2C54.755986%2Cpm2orl&mode=search&text=%D0%9C%D0%B0%D0%BD%D0%B5%D0%B6%20%E2%84%96%201%20%D0%A2%D0%B8%D1%85%D0%B2%D0%B8%D0%BD%D0%BA%D0%B0%2019%D0%95" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="venue-link-row">
+        <a href="https://yandex.ru/maps/org/manezh_1/15496579209" target="_blank" rel="noopener noreferrer">
+          📍 Открыть в Яндекс Картах →
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== FOOTER ====== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-brand">Кубок Дружбы 2026</div>
+    <p class="footer-text">Официальный турнирный портал · Апрель 2026</p>
+    <a href="https://www.perplexity.ai/computer" target="_blank" rel="noopener noreferrer">
+      Created with Perplexity Computer
+    </a>
+  </div>
+</footer>
+
+<script>
+// ============================================================
+// TOURNAMENT DATA
+// ============================================================
+
+const teams = [
+  { id: 1, name: 'Тёмная Лошадка', abbr: 'ТЛ', city: 'Смоленск', color: '#7c3aed' },
+  { id: 2, name: 'Альтернатива', abbr: 'АЛ', city: 'Смоленск', color: '#2563eb' },
+  { id: 3, name: 'Брянск', abbr: 'БР', city: 'Брянск', color: '#dc2626' },
+  { id: 4, name: 'Орёл', abbr: 'ОР', city: 'Орёл', color: '#16a34a' },
+  { id: 5, name: 'Орша', abbr: 'ОШ', city: 'Орша', color: '#0891b2' },
+  { id: 6, name: 'Витебск', abbr: 'ВТБ', city: 'Витебск', color: '#4a90d9' },
+];
+
+const matches = [
+  { num: 1, round: 1, home: 'Тёмная Лошадка', away: 'Витебск', time: '14:00-14:12' },
+  { num: 2, round: 1, home: 'Альтернатива', away: 'Орша', time: '14:15-14:27' },
+  { num: 3, round: 1, home: 'Брянск', away: 'Орёл', time: '14:30-14:42' },
+  { num: 4, round: 2, home: 'Тёмная Лошадка', away: 'Орша', time: '14:45-14:57' },
+  { num: 5, round: 2, home: 'Витебск', away: 'Орёл', time: '15:00-15:12' },
+  { num: 6, round: 2, home: 'Альтернатива', away: 'Брянск', time: '15:15-15:27' },
+  { num: 7, round: 3, home: 'Тёмная Лошадка', away: 'Орёл', time: '15:30-15:42' },
+  { num: 8, round: 3, home: 'Орша', away: 'Брянск', time: '15:45-15:57' },
+  { num: 9, round: 3, home: 'Витебск', away: 'Альтернатива', time: '16:00-16:12' },
+  { num: 10, round: 4, home: 'Тёмная Лошадка', away: 'Брянск', time: '16:15-16:27' },
+  { num: 11, round: 4, home: 'Орёл', away: 'Альтернатива', time: '16:30-16:42' },
+  { num: 12, round: 4, home: 'Орша', away: 'Витебск', time: '16:45-16:57' },
+  { num: 13, round: 5, home: 'Тёмная Лошадка', away: 'Альтернатива', time: '17:00-17:12' },
+  { num: 14, round: 5, home: 'Брянск', away: 'Витебск', time: '17:15-17:27' },
+  { num: 15, round: 5, home: 'Орёл', away: 'Орша', time: '17:30-17:42' },
+];
+
+const judgesData = {
+  main: { role: 'Главный судья', name: '' },
+  assistants: [
+    { role: 'Помощник судьи 1', name: '' },
+    { role: 'Помощник судьи 2', name: '' },
+    { role: 'Помощник судьи 3', name: '' },
+    { role: 'Помощник судьи 4', name: '' },
+    { role: 'Помощник судьи 5', name: '' },
+  ]
+};
+
+const orgData = [
+  { category: 'Площадка', icon: '🏟️', tasks: [
+    { text: 'Подтвердить бронь зала', person: 'Юра' },
+    { text: 'Уточнить время открытия зала', person: 'Юра' },
+    { text: 'Уточнить время закрытия зала', person: 'Юра' },
+  ]},
+  { category: 'Расписание', icon: '📋', tasks: [
+    { text: 'Составить таблицу матчей', person: 'Кэп' },
+    { text: 'Утвердить длительность тайма', person: 'Кэп' },
+  ]},
+  { category: 'Команды', icon: '👥', tasks: [
+    { text: 'Подтвердить 6 команд', person: 'Анд' },
+    { text: 'Получить окончательные составы', person: 'Анд' },
+  ]},
+  { category: 'Финансы', icon: '💰', tasks: [
+    { text: 'Определить размер взноса', person: 'Юра' },
+    { text: 'Собрать взносы', person: 'Юра' },
+  ]},
+  { category: 'Вода', icon: '💧', tasks: [
+    { text: 'Организовать бутыли с водой', person: 'Витя' },
+  ]},
+  { category: 'Перекусы', icon: '🍎', tasks: [
+    { text: 'Определить формат перекусов', person: 'Витя' },
+  ]},
+  { category: 'Медицина', icon: '🏥', tasks: [
+    { text: 'Собрать аптечку', person: 'Витя' },
+    { text: 'Купить спортивную заморозку', person: 'Анд' },
+  ]},
+  { category: 'Судейство', icon: '⚖️', tasks: [
+    { text: 'Назначить судью', person: 'Кэп' },
+  ]},
+  { category: 'Коммуникация', icon: '📢', tasks: [
+    { text: 'Опубликовать регламент', person: 'Ром' },
+    { text: 'Опубликовать расписание', person: 'Ром' },
+  ]},
+  { category: 'Финал', icon: '📸', tasks: [
+    { text: 'Организовать фотосессию', person: 'Ром' },
+  ]},
+  { category: 'Инвентарь', icon: '⚽', tasks: [
+    { text: 'Организовать мячи, свистки и др.', person: 'Анд' },
+  ]},
+  { category: 'Сувениры', icon: '🎁', tasks: [
+    { text: 'Организация сувениров и подарков', person: 'Ром' },
+  ]},
+  { category: 'Размещение', icon: '🏨', tasks: [
+    { text: 'Организовать ночлег для игроков', person: '?' },
+  ]},
+];
+
+const budgetItems = [
+  'Аренда зала',
+  'Вода',
+  'Перекусы',
+  'Аптечка',
+  'Печать материалов (Ром)',
+  'Прочие расходы',
+];
+
+// ============================================================
+// SVG BADGE GENERATOR
+// ============================================================
+
+function createTeamBadge(abbr, color, size = 56) {
+  const lighterColor = color + '33'; // ~20% opacity for background
+  return `<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="${size/2}" cy="${size/2}" r="${size/2 - 2}" fill="${lighterColor}" stroke="${color}" stroke-width="2.5"/>
+    <text x="${size/2}" y="${size/2}" text-anchor="middle" dominant-baseline="central" font-family="'Clash Display', sans-serif" font-weight="700" font-size="${size * 0.32}" fill="${color}">${abbr}</text>
+  </svg>`;
+}
+
+// ============================================================
+// RENDER FUNCTIONS
+// ============================================================
+
+function calcStandings() {
+  // Calculate standings from current score inputs
+  const stats = {};
+  teams.forEach(t => {
+    stats[t.name] = { played: 0, won: 0, drawn: 0, lost: 0, gf: 0, ga: 0, pts: 0 };
+  });
+
+  matches.forEach(m => {
+    const homeInput = document.querySelector(`.score-input[data-match="${m.num}"][data-side="home"]`);
+    const awayInput = document.querySelector(`.score-input[data-match="${m.num}"][data-side="away"]`);
+    if (!homeInput || !awayInput) return;
+    const hg = parseInt(homeInput.value) || 0;
+    const ag = parseInt(awayInput.value) || 0;
+
+    // Only count if at least one goal entered or match is played
+    const homeEl = homeInput;
+    const awayEl = awayInput;
+    const hasData = homeEl.classList.contains('has-value') || awayEl.classList.contains('has-value') || (hg > 0 || ag > 0);
+    if (!hasData && hg === 0 && ag === 0) return;
+
+    if (stats[m.home]) {
+      stats[m.home].played++;
+      stats[m.home].gf += hg;
+      stats[m.home].ga += ag;
+      if (hg > ag) { stats[m.home].won++; stats[m.home].pts += 3; }
+      else if (hg === ag) { stats[m.home].drawn++; stats[m.home].pts += 1; }
+      else { stats[m.home].lost++; }
+    }
+    if (stats[m.away]) {
+      stats[m.away].played++;
+      stats[m.away].gf += ag;
+      stats[m.away].ga += hg;
+      if (ag > hg) { stats[m.away].won++; stats[m.away].pts += 3; }
+      else if (ag === hg) { stats[m.away].drawn++; stats[m.away].pts += 1; }
+      else { stats[m.away].lost++; }
+    }
+  });
+
+  return stats;
+}
+
+function renderStandings() {
+  const el = document.getElementById('standingsTable');
+  const stats = calcStandings();
+
+  // Sort: points desc, then goal diff desc, then goals scored desc
+  const sorted = teams.slice().sort((a, b) => {
+    const sa = stats[a.name] || {};
+    const sb = stats[b.name] || {};
+    if ((sb.pts || 0) !== (sa.pts || 0)) return (sb.pts || 0) - (sa.pts || 0);
+    const diffA = (sa.gf || 0) - (sa.ga || 0);
+    const diffB = (sb.gf || 0) - (sb.ga || 0);
+    if (diffB !== diffA) return diffB - diffA;
+    return (sb.gf || 0) - (sa.gf || 0);
+  });
+
+  let html = `<table class="standings-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Команда</th>
+        <th>И</th>
+        <th>В</th>
+        <th>Н</th>
+        <th>П</th>
+        <th>ГЗ</th>
+        <th>ГП</th>
+        <th>РГ</th>
+        <th>О</th>
+      </tr>
+    </thead>
+    <tbody>`;
+
+  sorted.forEach((team, i) => {
+    const s = stats[team.name] || {};
+    const diff = (s.gf || 0) - (s.ga || 0);
+    const diffStr = diff > 0 ? '+' + diff : diff.toString();
+    html += `<tr>
+      <td class="rank">${i + 1}</td>
+      <td>${team.name}</td>
+      <td>${s.played || 0}</td>
+      <td>${s.won || 0}</td>
+      <td>${s.drawn || 0}</td>
+      <td>${s.lost || 0}</td>
+      <td>${s.gf || 0}</td>
+      <td>${s.ga || 0}</td>
+      <td>${diffStr}</td>
+      <td class="points">${s.pts || 0}</td>
+    </tr>`;
+  });
+
+  html += '</tbody></table>';
+  el.innerHTML = html;
+}
+
+function renderSchedule() {
+  const el = document.getElementById('scheduleGrid');
+  let html = '';
+  let currentRound = 0;
+
+  const roundLabels = {
+    1: 'Круг 1 — Стартовые матчи',
+    2: 'Круг 2',
+    3: 'Круг 3',
+    4: 'Круг 4',
+    5: 'Круг 5 — Финальные матчи',
+  };
+
+  matches.forEach(m => {
+    if (m.round !== currentRound) {
+      currentRound = m.round;
+      html += `<div class="round-header">${roundLabels[currentRound] || 'Круг ' + currentRound}</div>`;
+    }
+
+    html += `<div class="match-card light-beam">
+      <div class="match-number">${m.num}</div>
+      <div class="match-body">
+        <div class="match-team home">
+          <span class="team-name">${m.home}</span>
+        </div>
+        <div class="match-score">
+          <input type="number" class="score-input" min="0" max="99" value="0" data-match="${m.num}" data-side="home" onclick="this.select()">
+          <span class="score-divider">:</span>
+          <input type="number" class="score-input" min="0" max="99" value="0" data-match="${m.num}" data-side="away" onclick="this.select()">
+        </div>
+        <div class="match-team away">
+          <span class="team-name">${m.away}</span>
+        </div>
+      </div>
+      <div class="match-time">
+        <div class="time">${m.time}</div>
+        <div class="status">Предстоящий</div>
+      </div>
+    </div>`;
+  });
+
+  el.innerHTML = html;
+}
+
+function renderTeams() {
+  const el = document.getElementById('teamsGrid');
+  let html = '';
+
+  teams.forEach((team, idx) => {
+    // Build roster HTML
+    const playerRoles = [
+      { num: 1, role: 'Вратарь', type: 'field' },
+      { num: 2, role: 'Полевой', type: 'field' },
+      { num: 3, role: 'Полевой', type: 'field' },
+      { num: 4, role: 'Полевой', type: 'field' },
+      { num: 5, role: 'Полевой', type: 'field' },
+      { num: 6, role: 'Полевой', type: 'field' },
+      { num: 7, role: 'Замена', type: 'bench' },
+      { num: 8, role: 'Замена', type: 'bench' },
+      { num: 9, role: 'Замена', type: 'bench' },
+      { num: 10, role: 'Замена', type: 'bench' },
+    ];
+
+    let rosterHTML = '';
+    rosterHTML += '<div class="roster-section-title field">В поле — 6 игроков</div>';
+    playerRoles.filter(p => p.type === 'field').forEach(p => {
+      rosterHTML += `<div class="roster-player">
+        <div class="player-frame field-frame">${p.num}</div>
+        <span class="player-role">${p.role}</span>
+        <input type="text" class="player-name-input" placeholder="Никнейм" data-team="${idx}" data-num="${p.num}" onclick="event.stopPropagation(); this.select();">
+      </div>`;
+    });
+    rosterHTML += '<div class="roster-section-title bench">На замене — 4 игрока</div>';
+    playerRoles.filter(p => p.type === 'bench').forEach(p => {
+      rosterHTML += `<div class="roster-player">
+        <div class="player-frame bench-frame">${p.num}</div>
+        <span class="player-role">${p.role}</span>
+        <input type="text" class="player-name-input" placeholder="Никнейм" data-team="${idx}" data-num="${p.num}" onclick="event.stopPropagation(); this.select();">
+      </div>`;
+    });
+
+    html += `<div class="team-card light-beam" data-team="${idx}" onclick="toggleTeamRoster(${idx})">
+      <div class="team-card-top" style="background: linear-gradient(90deg, ${team.color}, ${team.color}88);"></div>
+      ${createTeamBadge(team.abbr, team.color)}
+      <div class="team-name">${team.name}</div>
+      <div class="team-city">${team.city}</div>
+      <div class="team-expand-hint">▼ Состав</div>
+      <div class="team-roster">${rosterHTML}</div>
+    </div>`;
+  });
+
+  el.innerHTML = html;
+}
+
+function renderJudges() {
+  const el = document.getElementById('judgesGrid');
+  const whistleIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>';
+  const groupIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>';
+  const chevronSvg = '<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>';
+
+  const mainName = judgesData.main.name || 'Не утверждён';
+
+  let html = `
+    <div class="judge-panel light-beam" onclick="this.classList.toggle('open')">
+      <div class="judge-panel-header">
+        <div class="judge-panel-icon">${whistleIcon}</div>
+        <div class="judge-panel-title">Главный судья</div>
+        <div class="judge-panel-status">${mainName}</div>
+        ${chevronSvg}
+      </div>
+      <div class="judge-panel-body">
+        <div class="judge-panel-content">
+          <div class="judge-person">
+            <div class="judge-person-num">1</div>
+            <div class="judge-person-role">Главный судья</div>
+            <input type="text" class="judge-name-input" placeholder="Никнейм" data-judge="main" onclick="event.stopPropagation(); this.select();">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="judge-panel light-beam" onclick="this.classList.toggle('open')">
+      <div class="judge-panel-header">
+        <div class="judge-panel-icon">${groupIcon}</div>
+        <div class="judge-panel-title">Помощники судьи</div>
+        <div class="judge-panel-status">5 человек</div>
+        ${chevronSvg}
+      </div>
+      <div class="judge-panel-body">
+        <div class="judge-panel-content">`;
+
+  judgesData.assistants.forEach((a, i) => {
+    html += `
+          <div class="judge-person">
+            <div class="judge-person-num muted">${i + 1}</div>
+            <div class="judge-person-role">${a.role}</div>
+            <input type="text" class="judge-name-input" placeholder="Никнейм" data-judge="assistant_${i}" onclick="event.stopPropagation(); this.select();">
+          </div>`;
+  });
+
+  html += `
+        </div>
+      </div>
+    </div>`;
+
+  el.innerHTML = html;
+}
+
+function renderOrg() {
+  const el = document.getElementById('orgGrid');
+  let html = '';
+
+  orgData.forEach((cat, i) => {
+    html += `<div class="org-card${i < 3 ? ' open' : ''}" data-org="${i}">
+      <div class="org-card-header" onclick="toggleOrg(${i})">
+        <h3>${cat.icon} ${cat.category}</h3>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="org-card-body">`;
+
+    cat.tasks.forEach((task, j) => {
+      html += `<div class="org-task">
+        <div class="checkbox" onclick="event.stopPropagation(); toggleCheck(this)" data-cat="${i}" data-task="${j}"></div>
+        <span class="task-text">${task.text}</span>
+        <span class="task-person">${task.person}</span>
+      </div>`;
+    });
+
+    html += '</div></div>';
+  });
+
+  el.innerHTML = html;
+}
+
+function renderBudget() {
+  const el = document.getElementById('budgetBody');
+  let html = '';
+
+  budgetItems.forEach((item, i) => {
+    html += `<tr>
+      <td>${item}</td>
+      <td><input type="text" inputmode="numeric" class="budget-input" data-budget="${i}" data-type="plan" placeholder="0 \u20bd"></td>
+      <td><input type="text" inputmode="numeric" class="budget-input" data-budget="${i}" data-type="fact" placeholder="0 \u20bd"></td>
+    </tr>`;
+  });
+
+  el.innerHTML = html;
+
+  // Attach handlers
+  document.querySelectorAll('.budget-input').forEach(input => {
+    input.addEventListener('input', function() {
+      // Allow only digits
+      this.value = this.value.replace(/[^\d]/g, '');
+      if (this.value) {
+        this.classList.add('has-value');
+      } else {
+        this.classList.remove('has-value');
+      }
+      updateBudgetTotals();
+      scheduleSave();
+    });
+    input.addEventListener('focus', function() {
+      this.select();
+    });
+  });
+
+  // Restore budget from localStorage
+  try {
+    const saved = JSON.parse(localStorage.getItem('kubokBudget') || '{}');
+    Object.keys(saved).forEach(key => {
+      const input = document.querySelector(`.budget-input[data-budget="${key.split('_')[0]}"][data-type="${key.split('_')[1]}"]`);
+      if (input && saved[key]) {
+        input.value = saved[key];
+        input.classList.add('has-value');
+      }
+    });
+    updateBudgetTotals();
+  } catch(e) {}
+}
+
+function updateBudgetTotals() {
+  let totalPlan = 0, totalFact = 0;
+  document.querySelectorAll('.budget-input[data-type="plan"]').forEach(input => {
+    totalPlan += parseInt(input.value) || 0;
+  });
+  document.querySelectorAll('.budget-input[data-type="fact"]').forEach(input => {
+    totalFact += parseInt(input.value) || 0;
+  });
+  const planEl = document.getElementById('budgetTotalPlan');
+  const factEl = document.getElementById('budgetTotalFact');
+  if (planEl) planEl.textContent = totalPlan.toLocaleString('ru-RU') + ' \u20bd';
+  if (factEl) factEl.textContent = totalFact.toLocaleString('ru-RU') + ' \u20bd';
+}
+
+// ============================================================
+// INTERACTIONS
+// ============================================================
+
+function toggleTeamRoster(idx) {
+  const card = document.querySelector(`[data-team="${idx}"]`);
+  const wasExpanded = card.classList.contains('expanded');
+  
+  // Close all other cards
+  document.querySelectorAll('.team-card.expanded').forEach(c => {
+    if (c !== card) c.classList.remove('expanded');
+  });
+  
+  card.classList.toggle('expanded');
+  
+  // On mobile, scroll the opened card into view
+  if (!wasExpanded && window.innerWidth <= 768) {
+    setTimeout(() => {
+      card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+  }
+}
+
+function toggleReg(type) {
+  const id = type === 'tournament' ? 'regTournament' : 'regJudges';
+  const otherId = type === 'tournament' ? 'regJudges' : 'regTournament';
+  const panel = document.getElementById(id);
+  const otherPanel = document.getElementById(otherId);
+  const isOpen = panel.classList.contains('open');
+
+  // Close the other one
+  otherPanel.classList.remove('open');
+  document.querySelectorAll('.reg-btn').forEach(btn => {
+    const btnType = btn.onclick.toString().includes('tournament') ? 'tournament' : 'judges';
+    if (btnType !== type) btn.classList.remove('open');
+  });
+
+  // Toggle this one
+  panel.classList.toggle('open');
+  // Toggle button state
+  const btns = document.querySelectorAll('.reg-btn');
+  btns.forEach(btn => {
+    if (btn.querySelector('.reg-btn-text').textContent.includes(type === 'tournament' ? 'Турнир' : 'Судей')) {
+      btn.classList.toggle('open', !isOpen);
+    }
+  });
+
+  // On mobile, scroll into view
+  if (!isOpen && window.innerWidth <= 768) {
+    setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+  }
+}
+
+function toggleOrg(idx) {
+  const card = document.querySelector(`[data-org="${idx}"]`);
+  card.classList.toggle('open');
+}
+
+function toggleCheck(el) {
+  el.classList.toggle('checked');
+  scheduleSave();
+}
+
+// Ball menu toggle
+function toggleBallMenu() {
+  const ball = document.getElementById('menuBall');
+  const panel = document.getElementById('menuPanel');
+  ball.classList.toggle('open');
+  panel.classList.toggle('open');
+}
+
+function closeBallMenu() {
+  document.getElementById('menuBall').classList.remove('open');
+  document.getElementById('menuPanel').classList.remove('open');
+}
+
+// Close menu when clicking outside
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('#menuBall') && !e.target.closest('#menuPanel')) {
+    closeBallMenu();
+  }
+});
+
+// ============================================================
+// GOOGLE APPS SCRIPT API
+// ============================================================
+const API_URL = localStorage.getItem('kubokApiUrl') || 'https://script.google.com/macros/s/AKfycbyyYyHEb7Uba6BZOpdmU18Ge_DzGs0xjb_LVVvC9qmXOuEq3xVA9zh0cd2ZEyUQwuNg/exec';
+
+let saveTimeout = null;
+
+// ---- RESTORE: localStorage first (instant), then API overwrites ----
+async function loadData() {
+  restoreFromLocalStorage();
+  
+  if (!API_URL) return;
+  try {
+    const res = await fetch(API_URL + '?action=getAll', { redirect: 'follow' });
+    const data = await res.json();
+    
+    // Restore scores from API
+    if (data.scores) {
+      Object.keys(data.scores).forEach(matchNum => {
+        const homeInput = document.querySelector(`.score-input[data-match="${matchNum}"][data-side="home"]`);
+        const awayInput = document.querySelector(`.score-input[data-match="${matchNum}"][data-side="away"]`);
+        if (homeInput && data.scores[matchNum].home != null) {
+          homeInput.value = data.scores[matchNum].home;
+          if (parseInt(homeInput.value) > 0) homeInput.classList.add('has-value');
+        }
+        if (awayInput && data.scores[matchNum].away != null) {
+          awayInput.value = data.scores[matchNum].away;
+          if (parseInt(awayInput.value) > 0) awayInput.classList.add('has-value');
+        }
+      });
+    }
+    
+    // Restore players from API
+    if (data.players && Object.keys(data.players).length > 0) {
+      Object.keys(data.players).forEach(key => {
+        const [teamIdx, playerNum] = key.split('_');
+        const input = document.querySelector(`.player-name-input[data-team="${teamIdx}"][data-num="${playerNum}"]`);
+        if (input && data.players[key]) {
+          input.value = data.players[key];
+          input.classList.add('has-name');
+        }
+      });
+      localStorage.setItem('kubokPlayers', JSON.stringify(data.players));
+    }
+    
+    // Restore judges from API
+    if (data.judges && Object.keys(data.judges).length > 0) {
+      Object.keys(data.judges).forEach(key => {
+        const input = document.querySelector(`.judge-name-input[data-judge="${key}"]`);
+        if (input && data.judges[key]) {
+          input.value = data.judges[key];
+          input.classList.add('has-name');
+        }
+      });
+      localStorage.setItem('kubokJudges', JSON.stringify(data.judges));
+    }
+    
+    // Restore checkboxes from API
+    if (data.checkboxes && Object.keys(data.checkboxes).length > 0) {
+      Object.keys(data.checkboxes).forEach(key => {
+        const [cat, task] = key.split('_');
+        const el = document.querySelector(`.checkbox[data-cat="${cat}"][data-task="${task}"]`);
+        if (el && data.checkboxes[key]) el.classList.add('checked');
+      });
+      localStorage.setItem('kubokCheckboxes', JSON.stringify(data.checkboxes));
+    }
+    
+    // Restore budget from API
+    if (data.budget && Object.keys(data.budget).length > 0) {
+      Object.keys(data.budget).forEach(key => {
+        const [idx, type] = key.split('_');
+        const input = document.querySelector(`.budget-input[data-budget="${idx}"][data-type="${type}"]`);
+        if (input && data.budget[key]) {
+          input.value = data.budget[key];
+          input.classList.add('has-value');
+        }
+      });
+      localStorage.setItem('kubokBudget', JSON.stringify(data.budget));
+      updateBudgetTotals();
+    }
+    
+    renderStandings();
+    console.log('Данные загружены из API');
+  } catch (e) {
+    console.error('Ошибка загрузки API (используются локальные данные):', e);
+  }
+}
+
+function restoreFromLocalStorage() {
+  // Players from localStorage
+  try {
+    const players = JSON.parse(localStorage.getItem('kubokPlayers') || '{}');
+    Object.keys(players).forEach(key => {
+      const [teamIdx, playerNum] = key.split('_');
+      const input = document.querySelector(`.player-name-input[data-team="${teamIdx}"][data-num="${playerNum}"]`);
+      if (input && players[key]) {
+        input.value = players[key];
+        input.classList.add('has-name');
+      }
+    });
+  } catch(e) {}
+  
+  // Judges from localStorage
+  try {
+    const judges = JSON.parse(localStorage.getItem('kubokJudges') || '{}');
+    Object.keys(judges).forEach(key => {
+      const input = document.querySelector(`.judge-name-input[data-judge="${key}"]`);
+      if (input && judges[key]) {
+        input.value = judges[key];
+        input.classList.add('has-name');
+      }
+    });
+  } catch(e) {}
+  
+  // Checkboxes from localStorage
+  try {
+    const checks = JSON.parse(localStorage.getItem('kubokCheckboxes') || '{}');
+    Object.keys(checks).forEach(key => {
+      const [cat, task] = key.split('_');
+      const el = document.querySelector(`.checkbox[data-cat="${cat}"][data-task="${task}"]`);
+      if (el && checks[key]) el.classList.add('checked');
+    });
+  } catch(e) {}
+  
+  // Budget from localStorage
+  try {
+    const budget = JSON.parse(localStorage.getItem('kubokBudget') || '{}');
+    Object.keys(budget).forEach(key => {
+      const [idx, type] = key.split('_');
+      const input = document.querySelector(`.budget-input[data-budget="${idx}"][data-type="${type}"]`);
+      if (input && budget[key]) {
+        input.value = budget[key];
+        input.classList.add('has-value');
+      }
+    });
+    updateBudgetTotals();
+  } catch(e) {}
+}
+
+// ---- SAVE: always to localStorage + API ----
+function scheduleSave() {
+  clearTimeout(saveTimeout);
+  saveTimeout = setTimeout(saveAllData, 1500);
+}
+
+async function saveAllData() {
+  try {
+    // Collect scores
+    const scores = {};
+    document.querySelectorAll('.score-input[data-side="home"]').forEach(input => {
+      const num = input.dataset.match;
+      const awayInput = document.querySelector(`.score-input[data-match="${num}"][data-side="away"]`);
+      scores[num] = {
+        home: parseInt(input.value) || 0,
+        away: parseInt(awayInput?.value) || 0
+      };
+    });
+    
+    // Collect players
+    const players = {};
+    document.querySelectorAll('.player-name-input').forEach(input => {
+      const key = input.dataset.team + '_' + input.dataset.num;
+      if (input.value.trim()) {
+        players[key] = input.value.trim();
+      }
+    });
+    
+    // Collect judges
+    const judges = {};
+    document.querySelectorAll('.judge-name-input').forEach(input => {
+      if (input.value.trim()) {
+        judges[input.dataset.judge] = input.value.trim();
+      }
+    });
+    
+    // Collect checkboxes
+    const checkboxes = {};
+    document.querySelectorAll('.checkbox').forEach(el => {
+      const key = el.dataset.cat + '_' + el.dataset.task;
+      checkboxes[key] = el.classList.contains('checked');
+    });
+    
+    // Collect budget
+    const budget = {};
+    document.querySelectorAll('.budget-input').forEach(input => {
+      const key = input.dataset.budget + '_' + input.dataset.type;
+      if (input.value.trim()) {
+        budget[key] = input.value.trim();
+      }
+    });
+    
+    // Always save EVERYTHING to localStorage (instant, reliable, works offline)
+    localStorage.setItem('kubokPlayers', JSON.stringify(players));
+    localStorage.setItem('kubokJudges', JSON.stringify(judges));
+    localStorage.setItem('kubokCheckboxes', JSON.stringify(checkboxes));
+    localStorage.setItem('kubokBudget', JSON.stringify(budget));
+    
+    // Send to API (for cross-device sync)
+    if (!API_URL) return;
+    
+    await fetch(API_URL, {
+      method: 'POST',
+      body: JSON.stringify({ action: 'saveAllScores', scores }),
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    });
+    await fetch(API_URL, {
+      method: 'POST',
+      body: JSON.stringify({ action: 'saveAllPlayers', players, judges, checkboxes, budget }),
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    });
+    
+    console.log('Сохранено (localStorage + API)');
+  } catch (e) {
+    console.error('Ошибка сохранения в API (локально сохранено):', e);
+  }
+}
+
+// API URL setup via menu
+function setupApi() {
+  const current = localStorage.getItem('kubokApiUrl') || '';
+  const url = prompt('Вставьте URL вашего Google Apps Script \u0432еб-приложения:', current);
+  if (url !== null) {
+    localStorage.setItem('kubokApiUrl', url.trim());
+    location.reload();
+  }
+}
+
+// ============================================================
+// INIT
+// ============================================================
+renderSchedule();
+renderTeams();
+renderJudges();
+renderOrg();
+renderBudget();
+renderStandings();
+
+// Score input handlers
+document.querySelectorAll('.score-input').forEach(input => {
+  input.addEventListener('input', function() {
+    const val = parseInt(this.value) || 0;
+    if (val > 0) {
+      this.classList.add('has-value');
+    } else {
+      this.classList.remove('has-value');
+    }
+    if (this.value !== '' && val > 99) this.value = 99;
+    if (this.value !== '' && val < 0) this.value = 0;
+    // Recalculate standings live
+    renderStandings();
+    // Auto-save
+    scheduleSave();
+  });
+  input.addEventListener('focus', function() {
+    this.select();
+  });
+});
+
+// Player name input handlers
+document.querySelectorAll('.player-name-input').forEach(input => {
+  input.addEventListener('input', function() {
+    if (this.value.trim()) {
+      this.classList.add('has-name');
+    } else {
+      this.classList.remove('has-name');
+    }
+    // Auto-save
+    scheduleSave();
+  });
+  input.addEventListener('focus', function(e) {
+    e.stopPropagation();
+    this.select();
+  });
+});
+
+// Judge name input handlers
+document.querySelectorAll('.judge-name-input').forEach(input => {
+  input.addEventListener('input', function() {
+    if (this.value.trim()) {
+      this.classList.add('has-name');
+    } else {
+      this.classList.remove('has-name');
+    }
+    scheduleSave();
+  });
+  input.addEventListener('focus', function(e) {
+    e.stopPropagation();
+    this.select();
+  });
+});
+
+// Load data from Google Sheets on startup
+loadData();
+
+// ============================================================
+// MINI-GAME: Удар по воротам
+// ============================================================
+let gameActive = false;
+let gameRAF = null;
+let gameCleanup = null;
+
+const gameAssets = {
+  keeper: {
+    low: Object.assign(new Image(), { src: 'kubok-assets/гол.PNG' }),
+    high: Object.assign(new Image(), { src: 'kubok-assets/ловлю.PNG' }),
+    miss: Object.assign(new Image(), { src: 'kubok-assets/мимо.PNG' }),
+    goal: Object.assign(new Image(), { src: 'kubok-assets/гол.PNG' }),
+  },
+  ball: {
+    idle: Object.assign(new Image(), { src: 'kubok-assets/мяч.PNG' }),
+  },
+};
+
+function imageReady(img) {
+  return img && img.complete && img.naturalWidth > 0;
+}
+
+function drawImageCover(ctx, img, x, y, w, h) {
+  if (!imageReady(img)) return false;
+  const srcW = img.naturalWidth;
+  const srcH = img.naturalHeight;
+  const srcRatio = srcW / srcH;
+  const dstRatio = w / h;
+  let cropW = srcW;
+  let cropH = srcH;
+  let cropX = 0;
+  let cropY = 0;
+
+  if (srcRatio > dstRatio) {
+    cropW = srcH * dstRatio;
+    cropX = (srcW - cropW) / 2;
+  } else {
+    cropH = srcW / dstRatio;
+    cropY = (srcH - cropH) / 2;
+  }
+
+  ctx.drawImage(img, cropX, cropY, cropW, cropH, x, y, w, h);
+  return true;
+}
+
+function drawImageContain(ctx, img, x, y, w, h) {
+  if (!imageReady(img)) return false;
+  const scale = Math.min(w / img.naturalWidth, h / img.naturalHeight);
+  const drawW = img.naturalWidth * scale;
+  const drawH = img.naturalHeight * scale;
+  const drawX = x + (w - drawW) / 2;
+  const drawY = y + (h - drawH) / 2;
+  ctx.drawImage(img, drawX, drawY, drawW, drawH);
+  return true;
+}
+
+function openMiniGame() {
+  document.getElementById('gameOverlay').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+  if (gameCleanup) gameCleanup();
+  initGame();
+}
+
+function closeMiniGame() {
+  document.getElementById('gameOverlay').style.display = 'none';
+  document.body.style.overflow = '';
+  gameActive = false;
+  if (gameRAF) cancelAnimationFrame(gameRAF);
+  if (gameCleanup) {
+    gameCleanup();
+    gameCleanup = null;
+  }
+}
+
+function initGame() {
+  const canvas = document.getElementById('gameCanvas');
+  const ctx = canvas.getContext('2d');
+  const overlay = document.getElementById('gameOverlay');
+  
+  function resizeCanvas() {
+    canvas.width = overlay.clientWidth;
+    canvas.height = overlay.clientHeight;
+  }
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+
+  // Game state
+  let score = 0;
+  let lives = 5;
+  let level = 1;
+  let shotFired = false;
+  let showResult = false;
+  let resultText = '';
+  let resultTimer = 0;
+  let highScore = parseInt(localStorage.getItem('kubokGameHigh') || '0');
+  let gameOver = false;
+  let stars = [];
+  let keeperReaction = '';
+  gameActive = true;
+
+  // Generate retro stars background
+  for (let i = 0; i < 60; i++) {
+    stars.push({
+      x: Math.random(),
+      y: Math.random(),
+      size: Math.random() * 2 + 0.5,
+      speed: Math.random() * 0.0003 + 0.0001,
+      brightness: Math.random() * 0.5 + 0.3
+    });
+  }
+
+  // Goal (moves left-right)
+  const goal = {
+    w: 0, h: 0, x: 0, y: 0,
+    speed: 1.5, dir: 1,
+    postW: 0,
+    reset() {
+      const W = canvas.width, H = canvas.height;
+      this.w = W * 0.35;
+      this.h = H * 0.12;
+      this.postW = Math.max(4, W * 0.008);
+      this.x = W / 2 - this.w / 2;
+      this.y = H * 0.08;
+      this.speed = 1.5 + level * 0.5;
+    }
+  };
+
+  // Goalkeeper
+  const keeper = {
+    w: 0, h: 0, x: 0, y: 0,
+    speed: 0, dir: 1,
+    reset() {
+      const W = canvas.width, H = canvas.height;
+      this.w = Math.max(30, W * 0.06);
+      this.h = Math.max(40, H * 0.08);
+      this.y = goal.y + goal.h + 4;
+      this.x = goal.x + goal.w / 2 - this.w / 2;
+      this.speed = 1 + level * 0.4;
+    }
+  };
+
+  // Ball
+  const ball = {
+    x: 0, y: 0, r: 0,
+    vx: 0, vy: 0,
+    active: false,
+    reset() {
+      const W = canvas.width, H = canvas.height;
+      this.r = Math.max(8, W * 0.015);
+      this.x = W / 2;
+      this.y = H * 0.82;
+      this.vx = 0;
+      this.vy = 0;
+      this.active = false;
+    }
+  };
+
+  // Aiming
+  let aimX = canvas.width / 2;
+  let aimDir = 1;
+  let aimSpeed = 2 + level * 0.3;
+
+  // Touch / mouse
+  function handleShoot(e) {
+    e.preventDefault();
+    if (gameOver) {
+      // Restart
+      score = 0;
+      lives = 5;
+      level = 1;
+      gameOver = false;
+      ball.reset();
+      goal.reset();
+      keeper.reset();
+      shotFired = false;
+      aimSpeed = 2 + level * 0.3;
+      return;
+    }
+    if (!shotFired && !showResult && ball.active === false) {
+      shotFired = true;
+      ball.active = true;
+      const W = canvas.width, H = canvas.height;
+      const targetX = aimX;
+      const targetY = goal.y + goal.h / 2;
+      const dx = targetX - ball.x;
+      const dy = targetY - ball.y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      const speed = Math.max(6, H * 0.012);
+      ball.vx = (dx / dist) * speed;
+      ball.vy = (dy / dist) * speed;
+    }
+  }
+
+  canvas.addEventListener('click', handleShoot);
+  canvas.addEventListener('touchstart', handleShoot, { passive: false });
+  gameCleanup = () => {
+    window.removeEventListener('resize', resizeCanvas);
+    canvas.removeEventListener('click', handleShoot);
+    canvas.removeEventListener('touchstart', handleShoot);
+  };
+
+  goal.reset();
+  keeper.reset();
+  ball.reset();
+
+  function drawField(W, H) {
+    // Dark green pitch gradient
+    const grad = ctx.createLinearGradient(0, 0, 0, H);
+    grad.addColorStop(0, '#0a2e0a');
+    grad.addColorStop(0.5, '#0d3b0d');
+    grad.addColorStop(1, '#0a2e0a');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, W, H);
+
+    // Retro scanlines
+    ctx.fillStyle = 'rgba(0,0,0,0.08)';
+    for (let i = 0; i < H; i += 3) {
+      ctx.fillRect(0, i, W, 1);
+    }
+
+    // Stars
+    stars.forEach(s => {
+      s.y += s.speed;
+      if (s.y > 1) s.y = 0;
+      ctx.fillStyle = `rgba(255,255,255,${s.brightness})`;
+      ctx.fillRect(s.x * W, s.y * H, s.size, s.size);
+    });
+
+    // Pitch lines
+    ctx.strokeStyle = 'rgba(255,255,255,0.1)';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(0, H * 0.5);
+    ctx.lineTo(W, H * 0.5);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.arc(W / 2, H * 0.5, W * 0.1, 0, Math.PI * 2);
+    ctx.stroke();
+  }
+
+  function drawGoal(W, H) {
+    const g = goal;
+    // Net
+    ctx.fillStyle = 'rgba(255,255,255,0.06)';
+    ctx.fillRect(g.x, g.y, g.w, g.h);
+    // Net lines
+    ctx.strokeStyle = 'rgba(255,255,255,0.12)';
+    ctx.lineWidth = 0.5;
+    for (let i = g.x; i < g.x + g.w; i += 12) {
+      ctx.beginPath();
+      ctx.moveTo(i, g.y);
+      ctx.lineTo(i, g.y + g.h);
+      ctx.stroke();
+    }
+    for (let j = g.y; j < g.y + g.h; j += 10) {
+      ctx.beginPath();
+      ctx.moveTo(g.x, j);
+      ctx.lineTo(g.x + g.w, j);
+      ctx.stroke();
+    }
+    // Posts
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(g.x - g.postW, g.y, g.postW, g.h + 4);
+    ctx.fillRect(g.x + g.w, g.y, g.postW, g.h + 4);
+    // Crossbar
+    ctx.fillRect(g.x - g.postW, g.y - 3, g.w + g.postW * 2, 4);
+  }
+
+  function drawKeeper(W, H) {
+    const k = keeper;
+    let sprite = gameAssets.keeper.low;
+    if (keeperReaction === 'miss') {
+      sprite = gameAssets.keeper.miss;
+    } else if (keeperReaction === 'goal') {
+      sprite = gameAssets.keeper.goal;
+    } else if (keeperReaction === 'save') {
+      sprite = gameAssets.keeper.high;
+    }
+    if (drawImageCover(ctx, sprite, k.x - k.w * 1.9, k.y - k.h * 2.1, k.w * 4.8, k.h * 4.2)) {
+      return;
+    }
+    // Body
+    ctx.fillStyle = '#e87a3a';
+    ctx.fillRect(k.x, k.y, k.w, k.h);
+    // Head
+    const headR = k.w * 0.35;
+    ctx.beginPath();
+    ctx.arc(k.x + k.w / 2, k.y - headR * 0.5, headR, 0, Math.PI * 2);
+    ctx.fillStyle = '#f5c89a';
+    ctx.fill();
+    // Arms
+    ctx.strokeStyle = '#e87a3a';
+    ctx.lineWidth = Math.max(3, k.w * 0.15);
+    ctx.lineCap = 'round';
+    ctx.beginPath();
+    ctx.moveTo(k.x, k.y + k.h * 0.2);
+    ctx.lineTo(k.x - k.w * 0.5, k.y - k.h * 0.1);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(k.x + k.w, k.y + k.h * 0.2);
+    ctx.lineTo(k.x + k.w + k.w * 0.5, k.y - k.h * 0.1);
+    ctx.stroke();
+    // Gloves
+    ctx.fillStyle = '#22c55e';
+    ctx.beginPath();
+    ctx.arc(k.x - k.w * 0.5, k.y - k.h * 0.1, k.w * 0.2, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(k.x + k.w + k.w * 0.5, k.y - k.h * 0.1, k.w * 0.2, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  function drawBall(W, H) {
+    const b = ball;
+    const sprite = gameAssets.ball.idle;
+    if (drawImageContain(ctx, sprite, b.x - b.r * 1.2, b.y - b.r * 1.2, b.r * 2.4, b.r * 2.4)) {
+      return;
+    }
+    ctx.beginPath();
+    ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
+    ctx.fillStyle = '#fff';
+    ctx.fill();
+    ctx.strokeStyle = '#333';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+    // Pentagon pattern
+    ctx.fillStyle = '#333';
+    ctx.beginPath();
+    ctx.arc(b.x, b.y, b.r * 0.4, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  function drawAim(W, H) {
+    if (shotFired || showResult || gameOver) return;
+    // Crosshair at aim position
+    ctx.strokeStyle = 'rgba(232, 122, 58, 0.8)';
+    ctx.lineWidth = 2;
+    const sz = 12;
+    const ay = goal.y + goal.h / 2;
+    ctx.beginPath();
+    ctx.moveTo(aimX - sz, ay);
+    ctx.lineTo(aimX + sz, ay);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(aimX, ay - sz);
+    ctx.lineTo(aimX, ay + sz);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.arc(aimX, ay, sz * 0.8, 0, Math.PI * 2);
+    ctx.stroke();
+    // Dotted line from ball to aim
+    ctx.setLineDash([4, 4]);
+    ctx.strokeStyle = 'rgba(232, 122, 58, 0.3)';
+    ctx.beginPath();
+    ctx.moveTo(ball.x, ball.y);
+    ctx.lineTo(aimX, ay);
+    ctx.stroke();
+    ctx.setLineDash([]);
+  }
+
+  function drawHUD(W, H) {
+    const fontSize = Math.max(14, W * 0.025);
+    ctx.font = `bold ${fontSize}px "Clash Display", sans-serif`;
+    ctx.textAlign = 'left';
+    ctx.fillStyle = '#e87a3a';
+    ctx.fillText(`ГОЛЫ: ${score}`, 16, fontSize + 10);
+    ctx.textAlign = 'right';
+    ctx.fillStyle = '#ffffff';
+    ctx.fillText('⚽'.repeat(lives), W - 16, fontSize + 10);
+    ctx.textAlign = 'center';
+    ctx.fillStyle = 'rgba(255,255,255,0.4)';
+    const smallFont = Math.max(11, W * 0.017);
+    ctx.font = `${smallFont}px "General Sans", sans-serif`;
+    ctx.fillText(`Уровень ${level} · Рекорд: ${highScore}`, W / 2, fontSize + 10);
+  }
+
+  function drawMessage(W, H, text, sub) {
+    ctx.fillStyle = 'rgba(0,0,0,0.5)';
+    ctx.fillRect(0, H * 0.35, W, H * 0.3);
+    const fontSize = Math.max(20, W * 0.045);
+    ctx.font = `bold ${fontSize}px "Clash Display", sans-serif`;
+    ctx.textAlign = 'center';
+    ctx.fillStyle = '#e87a3a';
+    ctx.fillText(text, W / 2, H * 0.48);
+    if (sub) {
+      const subFont = Math.max(13, W * 0.022);
+      ctx.font = `${subFont}px "General Sans", sans-serif`;
+      ctx.fillStyle = 'rgba(255,255,255,0.6)';
+      ctx.fillText(sub, W / 2, H * 0.55);
+    }
+  }
+
+  function drawStartScreen(W, H) {
+    drawField(W, H);
+    drawGoal(W, H);
+    drawKeeper(W, H);
+    drawBall(W, H);
+    drawHUD(W, H);
+    drawAim(W, H);
+    const fontSize = Math.max(14, W * 0.022);
+    ctx.font = `${fontSize}px "General Sans", sans-serif`;
+    ctx.textAlign = 'center';
+    ctx.fillStyle = 'rgba(255,255,255,0.5)';
+    ctx.fillText('Нажмите чтобы ударить по воротам', W / 2, H * 0.92);
+  }
+
+  function checkCollision() {
+    const b = ball;
+    const g = goal;
+    const k = keeper;
+
+    // Ball reached goal area
+    if (b.y - b.r <= g.y + g.h) {
+      // Check if ball is within goal posts
+      if (b.x > g.x && b.x < g.x + g.w) {
+        // Check if keeper catches it
+        if (b.x > k.x - k.w * 0.5 && b.x < k.x + k.w + k.w * 0.5 &&
+            b.y > k.y - k.h * 0.3 && b.y < k.y + k.h) {
+          // Saved!
+          resultText = 'ОТБИТО!';
+          keeperReaction = '';
+          lives--;
+        } else {
+          // GOAL!
+          resultText = 'ГОООЛ!!!';
+          keeperReaction = 'goal';
+          score++;
+          if (score > highScore) {
+            highScore = score;
+            localStorage.setItem('kubokGameHigh', highScore.toString());
+          }
+          if (score % 3 === 0) level++;
+        }
+      } else {
+        // Missed the goal entirely
+        resultText = 'МИМО!';
+        keeperReaction = 'miss';
+        lives--;
+      }
+      b.active = false;
+      showResult = true;
+      resultTimer = 60;
+      return true;
+    }
+    // Ball went off screen
+    if (b.y < -20 || b.x < -20 || b.x > canvas.width + 20) {
+      resultText = 'МИМО!';
+      keeperReaction = 'miss';
+      lives--;
+      b.active = false;
+      showResult = true;
+      resultTimer = 60;
+      return true;
+    }
+    return false;
+  }
+
+  function gameLoop() {
+    if (!gameActive) return;
+    const W = canvas.width;
+    const H = canvas.height;
+
+    // Recalc sizes on every frame (handles resize)
+    goal.w = W * 0.35;
+    goal.h = H * 0.12;
+    goal.postW = Math.max(4, W * 0.008);
+    goal.y = H * 0.08;
+    keeper.w = Math.max(30, W * 0.06);
+    keeper.h = Math.max(40, H * 0.08);
+    keeper.y = goal.y + goal.h + 4;
+    ball.r = Math.max(8, W * 0.015);
+
+    // Draw field
+    drawField(W, H);
+
+    if (gameOver) {
+      drawGoal(W, H);
+      drawMessage(W, H, `ИГРА ОКОНЧЕНА · ${score} голов`, 'Нажмите чтобы начать заново');
+      drawHUD(W, H);
+      gameRAF = requestAnimationFrame(gameLoop);
+      return;
+    }
+
+    // Move goal
+    goal.x += goal.speed * goal.dir;
+    if (goal.x + goal.w > W - 20) goal.dir = -1;
+    if (goal.x < 20) goal.dir = 1;
+
+    // Move keeper (slightly offset from goal center)
+    const goalCenterX = goal.x + goal.w / 2;
+    const keeperTarget = goalCenterX - keeper.w / 2 + Math.sin(Date.now() / 400) * goal.w * 0.3;
+    keeper.x += (keeperTarget - keeper.x) * 0.05;
+
+    // Move aim crosshair
+    if (!shotFired && !showResult) {
+      aimSpeed = 2 + level * 0.4;
+      aimX += aimSpeed * aimDir;
+      if (aimX > W - 30) aimDir = -1;
+      if (aimX < 30) aimDir = 1;
+      keeperReaction = '';
+    }
+
+    // Move ball
+    if (ball.active) {
+      ball.x += ball.vx;
+      ball.y += ball.vy;
+      // Shrink ball as it goes up (perspective)
+      const progress = 1 - (ball.y / (H * 0.82));
+      ball.r = Math.max(4, W * 0.015 * (1 - progress * 0.5));
+      checkCollision();
+    }
+
+    // Result display
+    if (showResult) {
+      resultTimer--;
+      if (resultTimer <= 0) {
+        showResult = false;
+        shotFired = false;
+        keeperReaction = '';
+        if (lives <= 0) {
+          gameOver = true;
+        } else {
+          ball.reset();
+          ball.x = W / 2;
+          ball.y = H * 0.82;
+        }
+      }
+    }
+
+    // Draw everything
+    drawGoal(W, H);
+    drawKeeper(W, H);
+    drawBall(W, H);
+    drawAim(W, H);
+    drawHUD(W, H);
+
+    if (showResult) {
+      const isGoal = resultText.includes('ГО');
+      const col = isGoal ? '#22c55e' : '#ef4444';
+      const fontSize = Math.max(24, W * 0.06);
+      ctx.font = `bold ${fontSize}px "Clash Display", sans-serif`;
+      ctx.textAlign = 'center';
+      ctx.fillStyle = col;
+      ctx.fillText(resultText, W / 2, H * 0.5);
+    }
+
+    if (!shotFired && !showResult && !gameOver) {
+      const fontSize = Math.max(12, W * 0.018);
+      ctx.font = `${fontSize}px "General Sans", sans-serif`;
+      ctx.textAlign = 'center';
+      ctx.fillStyle = 'rgba(255,255,255,0.4)';
+      ctx.fillText('Нажмите чтобы ударить', W / 2, H * 0.93);
+    }
+
+    gameRAF = requestAnimationFrame(gameLoop);
+  }
+
+  gameLoop();
+}
+</script>
+
+<!-- Game Overlay -->
+<div id="gameOverlay" style="display:none; position:fixed; inset:0; z-index:10000; background:#0a1628; flex-direction:column; align-items:center; justify-content:center;">
+  <button onclick="closeMiniGame()" style="position:absolute; top:12px; right:16px; z-index:10001; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); color:#fff; font-size:1.2rem; padding:0.4rem 1rem; border-radius:8px; cursor:pointer; font-family:'General Sans',sans-serif;">✖ Закрыть</button>
+  <canvas id="gameCanvas" style="width:100%; height:100%; display:block; touch-action:none;"></canvas>
+</div>
+
+</body>
+</html>
