@@ -9,15 +9,12 @@
 / /___/ /_/ / / / / / / /_/ / /_/ / /_/  __/ /
 \____/\____/_/ /_/ /_/ .___/\__,_/\__/\___/_/
                     /_/
-        Created with Perplexity Computer
-        https://www.perplexity.ai/computer
+        Официальный цифровой проект турнира
+        Разработка: Alexander Rum
+        Креативная команда: "Темная лошадка", Смоленск
 -->
-
-<!-- Perplexity Computer Attribution — SEO Meta Tags -->
-<meta name="generator" content="Perplexity Computer">
-<meta name="author" content="Perplexity Computer">
-<meta property="og:see_also" content="https://www.perplexity.ai/computer">
-<link rel="author" href="https://www.perplexity.ai/computer">
+<meta name="generator" content="Alexander Rum">
+<meta name="author" content="Разработка: Alexander Rum; Креативная команда: Темная лошадка, Смоленск">
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -554,9 +551,58 @@ body {
   animation: emblemFloat 6s ease-in-out infinite;
 }
 
+.hero-emblem-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.hero-emblem-wrap::before {
+  content: '';
+  position: absolute;
+  inset: 10% 16%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(232, 122, 58, 0.28) 0%, rgba(232, 122, 58, 0.08) 45%, transparent 72%);
+  filter: blur(18px);
+  z-index: 0;
+}
+
+.hero-emblem-wrap::after {
+  content: '';
+  position: absolute;
+  top: -8%;
+  bottom: -8%;
+  left: -35%;
+  width: 32%;
+  background: linear-gradient(115deg, transparent 0%, rgba(255,255,255,0.04) 35%, rgba(255,244,214,0.45) 50%, rgba(255,255,255,0.04) 65%, transparent 100%);
+  transform: translateX(-220%) skewX(-18deg);
+  animation: emblemShine 5.8s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 2;
+  mix-blend-mode: screen;
+}
+
+.hero-emblem-image {
+  position: relative;
+  z-index: 1;
+  width: clamp(180px, 28vw, 300px);
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 0 28px rgba(232, 122, 58, 0.24));
+  animation: emblemFloat 6s ease-in-out infinite;
+}
+
 @keyframes emblemFloat {
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-8px); }
+}
+
+@keyframes emblemShine {
+  0%, 58% { transform: translateX(-220%) skewX(-18deg); opacity: 0; }
+  64% { opacity: 1; }
+  82%, 100% { transform: translateX(360%) skewX(-18deg); opacity: 0; }
 }
 
 .hero-pretitle {
@@ -584,12 +630,13 @@ body {
 }
 
 .hero-year {
-  font-family: var(--font-display);
+  font-family: 'Century Gothic', 'General Sans', 'Roboto', sans-serif;
   font-weight: 300;
-  font-size: clamp(2rem, 6vw, 3.5rem);
+  font-size: clamp(1.3rem, 4vw, 2.2rem);
   color: var(--white);
-  opacity: 0.4;
-  letter-spacing: 0.2em;
+  opacity: 0.55;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
   margin-bottom: 1.5rem;
 }
 
@@ -1768,6 +1815,24 @@ section {
   margin-bottom: 0.75rem;
 }
 
+.footer-credits {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-bottom: 1rem;
+}
+
+.footer-credit-line {
+  font-size: 0.78rem;
+  color: var(--gray-400);
+  letter-spacing: 0.04em;
+}
+
+.footer-credit-line strong {
+  color: var(--orange-300);
+  font-weight: 600;
+}
+
 .footer a {
   color: var(--gray-400);
   text-decoration: none;
@@ -1792,6 +1857,10 @@ section {
   .info-grid { grid-template-columns: 1fr 1fr; }
   .judges-grid { grid-template-columns: 1fr 1fr; }
   .hero-meta { gap: 1rem; }
+  .footer-credit-line {
+    font-size: 0.72rem;
+    line-height: 1.5;
+  }
   .hero-comet {
     width: 42vw;
     top: 15%;
@@ -1908,8 +1977,12 @@ section {
   <div class="hero-gradient"></div>
 
   <div class="hero-content">
+    <div class="hero-emblem-wrap">
+      <img class="hero-emblem-image" src="kubok-assets/IMAGE 2026-03-18 21:56:52.jpg" alt="Логотип турнира Кубок Дружбы Смоленск 2026">
+    </div>
+
     <!-- Tournament Emblem SVG -->
-    <svg class="hero-emblem" viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg" aria-label="Эмблема турнира Кубок Дружбы 2026 — Смоленск">
+    <svg class="hero-emblem" viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg" aria-label="Эмблема турнира Кубок Дружбы 2026 — Смоленск" style="display:none;">
       <defs>
         <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="0%" y2="100%">
           <stop offset="0%" style="stop-color:#f5a070"/>
@@ -1981,9 +2054,9 @@ section {
       </g>
     </svg>
 
-    <div class="hero-pretitle">Официальный турнир</div>
+    <div class="hero-pretitle">Братский турнир</div>
     <h1 class="hero-title">Кубок Дружбы</h1>
-    <div class="hero-year">2026</div>
+    <div class="hero-year">Смоленск 2026</div>
 
     <div class="hero-meta">
       <div class="hero-meta-item">
@@ -2179,9 +2252,11 @@ section {
   <div class="container">
     <div class="footer-brand">Кубок Дружбы 2026</div>
     <p class="footer-text">Официальный турнирный портал · Апрель 2026</p>
-    <a href="https://www.perplexity.ai/computer" target="_blank" rel="noopener noreferrer">
-      Created with Perplexity Computer
-    </a>
+    <div class="footer-credits">
+      <div class="footer-credit-line"><strong>Разработка:</strong> Alexander Rum</div>
+      <div class="footer-credit-line"><strong>Креативная команда:</strong> "Темная лошадка", Смоленск</div>
+    </div>
+    <a href="#hero">Вернуться наверх ↑</a>
   </div>
 </footer>
 
