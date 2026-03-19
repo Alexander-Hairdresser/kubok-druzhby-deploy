@@ -346,35 +346,6 @@ body {
   animation: nebulaFloat 34s ease-in-out infinite reverse;
 }
 
-.hero-comet {
-  position: absolute;
-  top: 18%;
-  left: -30%;
-  width: 22vw;
-  min-width: 180px;
-  max-width: 360px;
-  height: 2px;
-  background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,0.15), rgba(251,185,144,0.5), rgba(255,255,255,0.95));
-  border-radius: 999px;
-  filter: drop-shadow(0 0 10px rgba(255,255,255,0.4));
-  opacity: 0;
-  transform: rotate(18deg);
-  display: none;
-}
-
-.hero-comet::after {
-  content: '';
-  position: absolute;
-  right: -6px;
-  top: 50%;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  transform: translateY(-50%);
-  background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(251,185,144,0.95) 45%, rgba(232,122,58,0.2) 75%, transparent 100%);
-  box-shadow: 0 0 18px rgba(255,255,255,0.45);
-}
-
 .hero-satellite {
   position: absolute;
   top: 24%;
@@ -507,12 +478,6 @@ body {
 @keyframes nebulaFloat {
   0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
   50% { transform: translate3d(18px, -10px, 0) scale(1.08); }
-}
-
-@keyframes cometFly {
-  0%, 82% { opacity: 0; transform: translate3d(0, 0, 0) rotate(18deg); }
-  84% { opacity: 0.95; }
-  100% { opacity: 0; transform: translate3d(145vw, 36vh, 0) rotate(18deg); }
 }
 
 @keyframes satelliteFly {
@@ -1923,11 +1888,6 @@ section {
     font-size: 0.72rem;
     line-height: 1.5;
   }
-  .hero-comet {
-    width: 42vw;
-    top: 15%;
-    animation-duration: 14s;
-  }
   .hero-satellite {
     width: 96px;
     height: 38px;
@@ -2026,7 +1986,6 @@ section {
       <div class="hero-stars hero-stars-2"></div>
       <div class="hero-nebula hero-nebula-1"></div>
       <div class="hero-nebula hero-nebula-2"></div>
-      <div class="hero-comet"></div>
       <div class="hero-satellite">
         <span class="sat-panel left"></span>
         <span class="sat-core"></span>
