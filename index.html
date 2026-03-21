@@ -1317,9 +1317,9 @@ section {
   width: 24px;
   height: 24px;
   border-radius: 7px;
-  border: 1px solid rgba(232, 122, 58, 0.28);
-  background: rgba(255, 255, 255, 0.03);
-  color: rgba(232, 122, 58, 0.55);
+  border: 1px solid rgba(232, 122, 58, 0.4);
+  background: linear-gradient(180deg, rgba(232, 122, 58, 0.1), rgba(232, 122, 58, 0.03));
+  color: rgba(255, 206, 150, 0.88);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1332,16 +1332,18 @@ section {
 }
 
 .captain-toggle:hover {
-  border-color: rgba(232, 122, 58, 0.55);
-  color: rgba(255, 214, 170, 0.95);
-  background: rgba(232, 122, 58, 0.08);
+  border-color: rgba(245, 160, 112, 0.88);
+  color: rgba(255, 244, 214, 1);
+  background: linear-gradient(180deg, rgba(240, 140, 80, 0.24), rgba(232, 122, 58, 0.1));
+  box-shadow: 0 0 12px rgba(232, 122, 58, 0.12);
 }
 
 .captain-toggle.active {
-  background: linear-gradient(180deg, rgba(232, 122, 58, 0.25), rgba(232, 122, 58, 0.12));
-  border-color: rgba(232, 122, 58, 0.72);
-  color: var(--orange-100);
-  box-shadow: 0 0 10px rgba(232, 122, 58, 0.18);
+  background: linear-gradient(180deg, #f5a070 0%, #f08c50 42%, #e87a3a 100%);
+  border-color: rgba(255, 214, 170, 0.92);
+  color: #fff7e8;
+  text-shadow: 0 1px 2px rgba(92, 42, 13, 0.35);
+  box-shadow: 0 0 14px rgba(232, 122, 58, 0.32), inset 0 1px 0 rgba(255, 244, 214, 0.35);
 }
 
 .player-name-empty {
@@ -2990,7 +2992,12 @@ function collectAllData() {
     budget[key] = input.value.trim();
   });
 
-  return { scores, players, judges, checkboxes, budget, captains };
+  const regulations = {
+    tournament: document.getElementById('regTournamentText')?.value || '',
+    judges: document.getElementById('regJudgesText')?.value || ''
+  };
+
+  return { scores, players, judges, checkboxes, budget, captains, regulations };
 }
 
 function persistLocalSnapshot(snapshot) {
@@ -2999,6 +3006,8 @@ function persistLocalSnapshot(snapshot) {
   localStorage.setItem('kubokCheckboxes', JSON.stringify(snapshot.checkboxes));
   localStorage.setItem('kubokBudget', JSON.stringify(snapshot.budget));
   localStorage.setItem('kubokCaptains', JSON.stringify(snapshot.captains || {}));
+  localStorage.setItem('kubokRegTournament', (snapshot.regulations && snapshot.regulations.tournament) || '');
+  localStorage.setItem('kubokRegJudges', (snapshot.regulations && snapshot.regulations.judges) || '');
 }
 
 async function postApi(payload, keepalive = false) {
@@ -3063,6 +3072,19 @@ async function loadData() {
         if (btn) btn.classList.add('active');
       });
       localStorage.setItem('kubokCaptains', JSON.stringify(data.captains));
+    }
+
+    if (data.regulations) {
+      const tournamentText = document.getElementById('regTournamentText');
+      const judgesText = document.getElementById('regJudgesText');
+      if (tournamentText && typeof data.regulations.tournament === 'string' && data.regulations.tournament.trim()) {
+        tournamentText.value = data.regulations.tournament;
+      }
+      if (judgesText && typeof data.regulations.judges === 'string' && data.regulations.judges.trim()) {
+        judgesText.value = data.regulations.judges;
+      }
+      localStorage.setItem('kubokRegTournament', data.regulations.tournament || '');
+      localStorage.setItem('kubokRegJudges', data.regulations.judges || '');
     }
     
     // Restore judges from API
@@ -3203,7 +3225,8 @@ async function saveAllData(snapshot = null, keepalive = false) {
         judges: data.judges,
         checkboxes: data.checkboxes,
         budget: data.budget,
-        captains: data.captains
+        captains: data.captains,
+        regulations: data.regulations
       }, keepalive);
       console.warn('saveAllData недоступен, использован запасной режим:', unifiedError);
     }
