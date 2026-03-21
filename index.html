@@ -838,6 +838,34 @@ section {
   margin-bottom: 0.75rem;
 }
 
+.reg-textarea {
+  width: 100%;
+  min-height: 260px;
+  resize: vertical;
+  border: 1px solid rgba(46, 180, 90, 0.25);
+  border-radius: 14px;
+  padding: 1rem 1.1rem;
+  background: rgba(8, 20, 38, 0.65);
+  color: var(--gray-100);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+}
+
+.reg-textarea:focus {
+  border-color: rgba(120, 255, 160, 0.55);
+  box-shadow: 0 0 0 3px rgba(120, 255, 160, 0.08);
+  background: rgba(10, 24, 42, 0.85);
+}
+
+.reg-note {
+  font-size: 0.8rem;
+  color: rgba(150, 255, 180, 0.7);
+  margin-bottom: 0.9rem;
+}
+
 .reg-content-inner ul, .reg-content-inner ol {
   margin-left: 1.25rem;
   margin-bottom: 0.75rem;
@@ -1283,6 +1311,37 @@ section {
   color: var(--gray-400);
   font-size: 0.75rem;
   font-style: italic;
+}
+
+.captain-toggle {
+  width: 24px;
+  height: 24px;
+  border-radius: 7px;
+  border: 1px solid rgba(232, 122, 58, 0.28);
+  background: rgba(255, 255, 255, 0.03);
+  color: rgba(232, 122, 58, 0.55);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+
+.captain-toggle:hover {
+  border-color: rgba(232, 122, 58, 0.55);
+  color: rgba(255, 214, 170, 0.95);
+  background: rgba(232, 122, 58, 0.08);
+}
+
+.captain-toggle.active {
+  background: linear-gradient(180deg, rgba(232, 122, 58, 0.25), rgba(232, 122, 58, 0.12));
+  border-color: rgba(232, 122, 58, 0.72);
+  color: var(--orange-100);
+  box-shadow: 0 0 10px rgba(232, 122, 58, 0.18);
 }
 
 .player-name-empty {
@@ -2108,7 +2167,8 @@ section {
     <div class="reg-content" id="regTournament">
       <div class="reg-content-inner">
         <h4>🏆 Регламент Турнира</h4>
-        <p>Текст регламента турнира будет добавлен позже.</p>
+        <p class="reg-note">Поле редактируемое. Вставленный текст сохраняется локально в браузере.</p>
+        <textarea class="reg-textarea" id="regTournamentText" placeholder="Вставьте сюда текст регламента турнира..."></textarea>
       </div>
     </div>
 
@@ -2116,7 +2176,8 @@ section {
     <div class="reg-content" id="regJudges">
       <div class="reg-content-inner">
         <h4>📜 Регламент Судейства</h4>
-        <p>Текст регламента судейства будет добавлен позже.</p>
+        <p class="reg-note">Поле редактируемое. Вставленный текст сохраняется локально в браузере.</p>
+        <textarea class="reg-textarea" id="regJudgesText" placeholder="Вставьте сюда текст регламента судейства..."></textarea>
       </div>
     </div>
 
@@ -2256,7 +2317,7 @@ section {
     <div class="footer-brand">Кубок Дружбы 2026</div>
     <p class="footer-text">Официальный турнирный портал · Апрель 2026</p>
     <div class="footer-credits">
-      <div class="footer-credit-line"><strong>Разработка:</strong> Alexander Rum</div>
+      <div class="footer-credit-line"><strong>Разработка:</strong> Dark Horse Team</div>
       <div class="footer-credit-line"><strong>Креативная команда:</strong> "Темная лошадка", Смоленск</div>
     </div>
     <a href="#hero">Вернуться наверх ↑</a>
@@ -2363,6 +2424,33 @@ const budgetItems = [
   'Печать материалов (Ром)',
   'Прочие расходы',
 ];
+
+const regulationDefaults = {
+  tournament: `Наш турнир носит дружеский и братский характер. Его главная цель - не определить сильнейшую команду любой ценой, а создать добрую атмосферу общения, взаимного уважения и совместного отдыха.
+
+Футбол в рамках турнира рассматривается как способ собраться вместе, проявить хорошие качества, поддержать друг друга и провести день в спокойной и позитивной обстановке.
+
+От всех участников ожидаются уважительное поведение, самообладание, аккуратная игра и внимательное отношение к соперникам и партнёрам по команде. Излишняя жёсткость, грубая борьба, опасные столкновения, чрезмерно сильные удары и негативные высказывания не соответствуют духу турнира.
+
+Безопасность участников, братская атмосфера и корректное поведение на поле имеют приоритет над спортивным результатом.
+
+Капитаны команд несут дополнительную ответственность за настрой своих игроков и соблюдение установленных правил на протяжении всего турнира.`,
+  judges: `Судейство осуществляется самими командами. Просим заранее определить из состава команды тех, кто сможет грамотно и спокойно выполнять обязанности судьи.
+
+Во время матчей к судьям следует относиться с уважением. Недопустимы повышенный тон, споры в резкой форме и давление на судью. Если возникает спорный момент, он должен обсуждаться спокойно и корректно.
+
+Свистки и карточки передаются следующей команде, назначенной на судейство.
+
+Бутсы разрешены, однако при опасной игре бутсой в ногу судья вправе сразу вынести предупреждение.
+
+Болельщикам следует находиться только по краям игрового поля (или отведенном для них месте) и не мешать проведению матчей.
+
+Команды, играющие первые матчи, должны прибыть без опозданий. Желательно быть на месте за 20–30 минут до начала турнира, чтобы вовремя подготовиться и не нарушать общее расписание.
+
+Если у двух команд одинаковый или схожий цвет формы, на время матча одной из команд выдаются манишки.
+
+Основной принцип судейства на турнире - сохранить уважительную, безопасную и братскую атмосферу игры. Главная задача судьи состоит не только в контроле правил, но и в поддержании спокойного и доброжелательного хода матча.`
+};
 
 // ============================================================
 // SVG BADGE GENERATOR
@@ -2544,6 +2632,7 @@ function renderTeams() {
       rosterHTML += `<div class="roster-player">
         <div class="player-frame field-frame">${p.num}</div>
         <span class="player-role">${p.role}</span>
+        <button type="button" class="captain-toggle" data-team="${idx}" data-num="${p.num}" title="Отметить капитана" onclick="toggleCaptain(${idx}, ${p.num}, event)">К</button>
         <input type="text" class="player-name-input" placeholder="Никнейм" data-team="${idx}" data-num="${p.num}" onclick="event.stopPropagation(); this.select();">
       </div>`;
     });
@@ -2552,6 +2641,7 @@ function renderTeams() {
       rosterHTML += `<div class="roster-player">
         <div class="player-frame bench-frame">${p.num}</div>
         <span class="player-role">${p.role}</span>
+        <button type="button" class="captain-toggle" data-team="${idx}" data-num="${p.num}" title="Отметить капитана" onclick="toggleCaptain(${idx}, ${p.num}, event)">К</button>
         <input type="text" class="player-name-input" placeholder="Никнейм" data-team="${idx}" data-num="${p.num}" onclick="event.stopPropagation(); this.select();">
       </div>`;
     });
@@ -2735,12 +2825,13 @@ function toggleTeamRoster(idx) {
   }
 }
 
-function toggleReg(type) {
+function toggleReg(type, forceOpen = false) {
   const id = type === 'tournament' ? 'regTournament' : 'regJudges';
   const otherId = type === 'tournament' ? 'regJudges' : 'regTournament';
   const panel = document.getElementById(id);
   const otherPanel = document.getElementById(otherId);
   const isOpen = panel.classList.contains('open');
+  const shouldOpen = forceOpen ? true : !isOpen;
 
   // Close the other one
   otherPanel.classList.remove('open');
@@ -2750,18 +2841,72 @@ function toggleReg(type) {
   });
 
   // Toggle this one
-  panel.classList.toggle('open');
+  panel.classList.toggle('open', shouldOpen);
   // Toggle button state
   const btns = document.querySelectorAll('.reg-btn');
   btns.forEach(btn => {
     if (btn.querySelector('.reg-btn-text').textContent.includes(type === 'tournament' ? 'Турнир' : 'Судей')) {
-      btn.classList.toggle('open', !isOpen);
+      btn.classList.toggle('open', shouldOpen);
     }
   });
 
   // On mobile, scroll into view
-  if (!isOpen && window.innerWidth <= 768) {
+  if (shouldOpen && !isOpen && window.innerWidth <= 768) {
     setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+  }
+}
+
+function toggleCaptain(teamIdx, playerNum, event) {
+  if (event) event.stopPropagation();
+  const selector = `.captain-toggle[data-team="${teamIdx}"]`;
+  const current = document.querySelector(`.captain-toggle[data-team="${teamIdx}"][data-num="${playerNum}"]`);
+  if (!current) return;
+  const willActivate = !current.classList.contains('active');
+
+  document.querySelectorAll(selector).forEach(el => el.classList.remove('active'));
+  if (willActivate) {
+    current.classList.add('active');
+  }
+
+  scheduleSave();
+}
+
+function initRegulations() {
+  const versionKey = 'kubokRegulationsVersion';
+  const currentVersion = '2026-03-21-v2';
+  const fields = [
+    { id: 'regTournamentText', key: 'kubokRegTournament', fallback: regulationDefaults.tournament },
+    { id: 'regJudgesText', key: 'kubokRegJudges', fallback: regulationDefaults.judges }
+  ];
+
+  const shouldRefreshDefaults = localStorage.getItem(versionKey) !== currentVersion;
+
+  fields.forEach(({ id, key, fallback }) => {
+    const input = document.getElementById(id);
+    if (!input) return;
+    if (shouldRefreshDefaults) {
+      localStorage.setItem(key, fallback);
+    }
+    input.value = localStorage.getItem(key) || fallback;
+    input.addEventListener('input', () => {
+      localStorage.setItem(key, input.value);
+    });
+  });
+
+  if (shouldRefreshDefaults) {
+    localStorage.setItem(versionKey, currentVersion);
+  }
+
+  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    document.querySelectorAll('.reg-btn').forEach(btn => {
+      btn.addEventListener('mouseenter', () => {
+        if (btn.querySelector('.reg-btn-text')?.textContent.includes('Турнира')) {
+          toggleReg('tournament', true);
+        } else {
+          toggleReg('judges', true);
+        }
+      });
+    });
   }
 }
 
@@ -2821,6 +2966,11 @@ function collectAllData() {
     }
   });
 
+  const captains = {};
+  document.querySelectorAll('.captain-toggle.active').forEach(btn => {
+    captains[btn.dataset.team] = btn.dataset.num;
+  });
+
   const judges = {};
   document.querySelectorAll('.judge-name-input').forEach(input => {
     if (input.value.trim()) {
@@ -2840,7 +2990,7 @@ function collectAllData() {
     budget[key] = input.value.trim();
   });
 
-  return { scores, players, judges, checkboxes, budget };
+  return { scores, players, judges, checkboxes, budget, captains };
 }
 
 function persistLocalSnapshot(snapshot) {
@@ -2848,6 +2998,7 @@ function persistLocalSnapshot(snapshot) {
   localStorage.setItem('kubokJudges', JSON.stringify(snapshot.judges));
   localStorage.setItem('kubokCheckboxes', JSON.stringify(snapshot.checkboxes));
   localStorage.setItem('kubokBudget', JSON.stringify(snapshot.budget));
+  localStorage.setItem('kubokCaptains', JSON.stringify(snapshot.captains || {}));
 }
 
 async function postApi(payload, keepalive = false) {
@@ -2903,6 +3054,15 @@ async function loadData() {
         }
       });
       localStorage.setItem('kubokPlayers', JSON.stringify(data.players));
+    }
+
+    if (data.captains && Object.keys(data.captains).length > 0) {
+      document.querySelectorAll('.captain-toggle.active').forEach(el => el.classList.remove('active'));
+      Object.keys(data.captains).forEach(teamIdx => {
+        const btn = document.querySelector(`.captain-toggle[data-team="${teamIdx}"][data-num="${data.captains[teamIdx]}"]`);
+        if (btn) btn.classList.add('active');
+      });
+      localStorage.setItem('kubokCaptains', JSON.stringify(data.captains));
     }
     
     // Restore judges from API
@@ -2964,6 +3124,15 @@ function restoreFromLocalStorage() {
         input.value = players[key];
         input.classList.add('has-name');
       }
+    });
+  } catch(e) {}
+
+  try {
+    const captains = JSON.parse(localStorage.getItem('kubokCaptains') || '{}');
+    document.querySelectorAll('.captain-toggle.active').forEach(el => el.classList.remove('active'));
+    Object.keys(captains).forEach(teamIdx => {
+      const btn = document.querySelector(`.captain-toggle[data-team="${teamIdx}"][data-num="${captains[teamIdx]}"]`);
+      if (btn) btn.classList.add('active');
     });
   } catch(e) {}
   
@@ -3033,7 +3202,8 @@ async function saveAllData(snapshot = null, keepalive = false) {
         players: data.players,
         judges: data.judges,
         checkboxes: data.checkboxes,
-        budget: data.budget
+        budget: data.budget,
+        captains: data.captains
       }, keepalive);
       console.warn('saveAllData недоступен, использован запасной режим:', unifiedError);
     }
@@ -3068,6 +3238,7 @@ renderJudges();
 renderOrg();
 renderBudget();
 renderStandings();
+initRegulations();
 
 // Score input handlers
 document.querySelectorAll('.score-input').forEach(input => {
