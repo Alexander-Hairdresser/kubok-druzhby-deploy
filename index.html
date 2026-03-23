@@ -3075,6 +3075,7 @@ document.addEventListener('click', (e) => {
 const API_URL = localStorage.getItem('kubokApiUrl') || 'https://script.google.com/macros/s/AKfycbyyYyHEb7Uba6BZOpdmU18Ge_DzGs0xjb_LVVvC9qmXOuEq3xVA9zh0cd2ZEyUQwuNg/exec';
 
 let saveTimeout = null;
+let syncInFlight = false;
 
 function collectAllData() {
   const scores = {};
@@ -3170,8 +3171,10 @@ async function postApi(payload, keepalive = false) {
 }
 
 // ---- RESTORE: localStorage first (instant), then API overwrites ----
-async function loadData() {
-  restoreFromLocalStorage();
+async function loadData(options = {}) {
+  if (!options.skipLocalRestore) {
+    restoreFromLocalStorage();
+  }
   
   if (!API_URL) return;
   try {
@@ -3388,6 +3391,62 @@ function restoreFromLocalStorage() {
   } catch(e) {}
 }
 
+function resetAllScoresToZero() {
+  const zeroScores = {};
+  matches.forEach(match => {
+    zeroScores[match.num] = { home: 0, away: 0 };
+  });
+
+  document.querySelectorAll('.score-input').forEach(input => {
+    input.value = '0';
+    input.classList.remove('has-value');
+  });
+
+  const snapshot = collectAllData();
+  snapshot.scores = zeroScores;
+  snapshot.meta = { updatedAt: Date.now() };
+  persistLocalSnapshot(snapshot);
+  renderStandings();
+  return snapshot;
+}
+
+function initializeScoreResetVersion() {
+  const versionKey = 'kubokScoresResetVersion';
+  const currentVersion = '2026-03-23-zero-reset-v1';
+  if (localStorage.getItem(versionKey) === currentVersion) {
+    return false;
+  }
+
+  resetAllScoresToZero();
+  localStorage.setItem(versionKey, currentVersion);
+  return true;
+}
+
+async function syncLatestDataFromApi() {
+  if (syncInFlight || document.visibilityState !== 'visible') return;
+  if (saveTimeout) return;
+
+  const activeEl = document.activeElement;
+  if (activeEl && (
+    activeEl.classList.contains('score-input') ||
+    activeEl.classList.contains('player-name-input') ||
+    activeEl.classList.contains('judge-name-input') ||
+    activeEl.classList.contains('budget-input') ||
+    activeEl.classList.contains('tournament-setting-input') ||
+    activeEl.id === 'regTournamentText' ||
+    activeEl.id === 'regJudgesText'
+  )) {
+    return;
+  }
+
+  syncInFlight = true;
+  try {
+    await loadData({ skipLocalRestore: true });
+  } finally {
+    syncInFlight = false;
+  }
+}
+
 // ---- SAVE: always to localStorage + API ----
 function scheduleSave() {
   applyTournamentSettings(collectTournamentSettingsFromInputs(), { skipInputSync: true });
@@ -3398,6 +3457,7 @@ function scheduleSave() {
 }
 
 async function saveAllData(snapshot = null, keepalive = false) {
+  saveTimeout = null;
   try {
     const data = snapshot || collectAllData();
     persistLocalSnapshot(data);
@@ -3454,6 +3514,7 @@ renderBudget();
 renderStandings();
 initRegulations();
 updateTournamentSettingInputs();
+const didResetScores = initializeScoreResetVersion();
 
 document.querySelectorAll('.tournament-setting-input').forEach(input => {
   const syncTournamentSettings = () => {
@@ -3533,6 +3594,10 @@ document.addEventListener('visibilitychange', () => {
 
 // Load data from Google Sheets on startup
 loadData();
+if (didResetScores) {
+  saveAllData(collectAllData());
+}
+setInterval(syncLatestDataFromApi, 5000);
 
 // ============================================================
 // MINI-GAME: Удар по воротам
