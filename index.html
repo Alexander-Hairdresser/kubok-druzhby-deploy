@@ -1852,6 +1852,40 @@ section {
   margin-bottom: 0.25rem;
 }
 
+.info-card .info-value.info-value-editable {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+}
+
+.info-input {
+  width: 100%;
+  max-width: 120px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  background: rgba(8, 15, 32, 0.58);
+  color: var(--orange-400);
+  font: inherit;
+  font-weight: 700;
+  text-align: center;
+  padding: 0.3rem 0.55rem;
+  outline: none;
+}
+
+.info-input:focus {
+  border-color: rgba(255, 159, 90, 0.65);
+  box-shadow: 0 0 0 3px rgba(255, 159, 90, 0.14);
+}
+
+.info-input[type="time"] {
+  max-width: 140px;
+}
+
+.info-suffix {
+  white-space: nowrap;
+}
+
 .info-card .info-label {
   font-size: 0.8rem;
   color: var(--gray-400);
@@ -2193,11 +2227,16 @@ section {
         <div class="info-label">Матчей</div>
       </div>
       <div class="info-card">
-        <div class="info-value">15 мин</div>
+        <div class="info-value info-value-editable">
+          <input class="info-input tournament-setting-input" id="matchDurationInput" type="number" min="1" max="99" step="1" value="15" inputmode="numeric">
+          <span class="info-suffix">мин</span>
+        </div>
         <div class="info-label">Длительность</div>
       </div>
       <div class="info-card">
-        <div class="info-value">12:45</div>
+        <div class="info-value info-value-editable">
+          <input class="info-input tournament-setting-input" id="startTimeInput" type="time" step="60" value="12:45">
+        </div>
         <div class="info-label">Начало</div>
       </div>
     </div>
@@ -2357,6 +2396,94 @@ const matches = [
   { num: 14, round: 5, home: 'Орёл', away: 'Орша', time: '16:39-16:54' },
   { num: 15, round: 5, home: 'Альтернатива', away: 'Витебск', time: '16:57-17:12' },
 ];
+
+const tournamentSettingsDefaults = {
+  matchDuration: 15,
+  breakDuration: 3,
+  startTime: '12:45'
+};
+
+const tournamentSettings = { ...tournamentSettingsDefaults };
+
+function normalizeMatchDuration(value) {
+  const parsed = parseInt(value, 10);
+  if (!Number.isFinite(parsed)) return tournamentSettingsDefaults.matchDuration;
+  return Math.max(1, Math.min(99, parsed));
+}
+
+function normalizeStartTime(value) {
+  if (typeof value !== 'string') return tournamentSettingsDefaults.startTime;
+  const trimmed = value.trim();
+  const match = trimmed.match(/^(\d{1,2}):(\d{2})$/);
+  if (!match) return tournamentSettingsDefaults.startTime;
+  const hours = Math.max(0, Math.min(23, parseInt(match[1], 10)));
+  const minutes = Math.max(0, Math.min(59, parseInt(match[2], 10)));
+  return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
+}
+
+function timeToMinutes(timeString) {
+  const [hours, minutes] = normalizeStartTime(timeString).split(':').map(Number);
+  return hours * 60 + minutes;
+}
+
+function minutesToTime(totalMinutes) {
+  const normalized = ((totalMinutes % 1440) + 1440) % 1440;
+  const hours = Math.floor(normalized / 60);
+  const minutes = normalized % 60;
+  return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
+}
+
+function recalculateMatchTimes() {
+  let cursor = timeToMinutes(tournamentSettings.startTime);
+  matches.forEach(match => {
+    const start = cursor;
+    const end = start + tournamentSettings.matchDuration;
+    match.time = `${minutesToTime(start)}-${minutesToTime(end)}`;
+    cursor = end + tournamentSettings.breakDuration;
+  });
+}
+
+function updateTournamentSettingInputs() {
+  const durationInput = document.getElementById('matchDurationInput');
+  const startInput = document.getElementById('startTimeInput');
+  if (durationInput) durationInput.value = String(tournamentSettings.matchDuration);
+  if (startInput) startInput.value = tournamentSettings.startTime;
+}
+
+function updateRenderedMatchTimes() {
+  matches.forEach(match => {
+    const timeEl = document.querySelector(`.time[data-match-time="${match.num}"]`);
+    if (timeEl) timeEl.textContent = match.time;
+  });
+}
+
+function applyTournamentSettings(nextSettings = {}, options = {}) {
+  tournamentSettings.matchDuration = normalizeMatchDuration(
+    nextSettings.matchDuration ?? tournamentSettings.matchDuration
+  );
+  tournamentSettings.startTime = normalizeStartTime(
+    nextSettings.startTime ?? tournamentSettings.startTime
+  );
+  tournamentSettings.breakDuration = tournamentSettingsDefaults.breakDuration;
+
+  recalculateMatchTimes();
+
+  if (!options.skipInputSync) {
+    updateTournamentSettingInputs();
+  }
+  if (!options.skipRenderedUpdate) {
+    updateRenderedMatchTimes();
+  }
+}
+
+function collectTournamentSettingsFromInputs() {
+  return {
+    matchDuration: document.getElementById('matchDurationInput')?.value || tournamentSettings.matchDuration,
+    startTime: document.getElementById('startTimeInput')?.value || tournamentSettings.startTime
+  };
+}
+
+applyTournamentSettings(tournamentSettingsDefaults, { skipRenderedUpdate: true });
 
 const judgesData = {
   main: { role: 'Главный судья', name: '' },
@@ -2600,7 +2727,7 @@ function renderSchedule() {
         </div>
       </div>
       <div class="match-time">
-        <div class="time">${m.time}</div>
+        <div class="time" data-match-time="${m.num}">${m.time}</div>
         <div class="status">Предстоящий</div>
       </div>
     </div>`;
@@ -2997,7 +3124,12 @@ function collectAllData() {
     judges: document.getElementById('regJudgesText')?.value || ''
   };
 
-  return { scores, players, judges, checkboxes, budget, captains, regulations };
+  const settings = {
+    matchDuration: tournamentSettings.matchDuration,
+    startTime: tournamentSettings.startTime
+  };
+
+  return { scores, players, judges, checkboxes, budget, captains, regulations, settings };
 }
 
 function persistLocalSnapshot(snapshot) {
@@ -3008,6 +3140,10 @@ function persistLocalSnapshot(snapshot) {
   localStorage.setItem('kubokCaptains', JSON.stringify(snapshot.captains || {}));
   localStorage.setItem('kubokRegTournament', (snapshot.regulations && snapshot.regulations.tournament) || '');
   localStorage.setItem('kubokRegJudges', (snapshot.regulations && snapshot.regulations.judges) || '');
+  localStorage.setItem('kubokSettings', JSON.stringify(snapshot.settings || {
+    matchDuration: tournamentSettings.matchDuration,
+    startTime: tournamentSettings.startTime
+  }));
 }
 
 async function postApi(payload, keepalive = false) {
@@ -3086,6 +3222,14 @@ async function loadData() {
       localStorage.setItem('kubokRegTournament', data.regulations.tournament || '');
       localStorage.setItem('kubokRegJudges', data.regulations.judges || '');
     }
+
+    if (data.settings) {
+      applyTournamentSettings(data.settings);
+      localStorage.setItem('kubokSettings', JSON.stringify({
+        matchDuration: tournamentSettings.matchDuration,
+        startTime: tournamentSettings.startTime
+      }));
+    }
     
     // Restore judges from API
     if (data.judges && Object.keys(data.judges).length > 0) {
@@ -3136,6 +3280,11 @@ async function loadData() {
 }
 
 function restoreFromLocalStorage() {
+  try {
+    const settings = JSON.parse(localStorage.getItem('kubokSettings') || '{}');
+    applyTournamentSettings(settings);
+  } catch(e) {}
+
   // Players from localStorage
   try {
     const players = JSON.parse(localStorage.getItem('kubokPlayers') || '{}');
@@ -3202,10 +3351,11 @@ function restoreFromLocalStorage() {
 
 // ---- SAVE: always to localStorage + API ----
 function scheduleSave() {
+  applyTournamentSettings(collectTournamentSettingsFromInputs(), { skipInputSync: true });
   const snapshot = collectAllData();
   persistLocalSnapshot(snapshot);
   clearTimeout(saveTimeout);
-  saveTimeout = setTimeout(() => saveAllData(snapshot), 1200);
+  saveTimeout = setTimeout(() => saveAllData(snapshot), 600);
 }
 
 async function saveAllData(snapshot = null, keepalive = false) {
@@ -3226,7 +3376,8 @@ async function saveAllData(snapshot = null, keepalive = false) {
         checkboxes: data.checkboxes,
         budget: data.budget,
         captains: data.captains,
-        regulations: data.regulations
+        regulations: data.regulations,
+        settings: data.settings
       }, keepalive);
       console.warn('saveAllData недоступен, использован запасной режим:', unifiedError);
     }
@@ -3262,6 +3413,21 @@ renderOrg();
 renderBudget();
 renderStandings();
 initRegulations();
+updateTournamentSettingInputs();
+
+document.querySelectorAll('.tournament-setting-input').forEach(input => {
+  const syncTournamentSettings = () => {
+    applyTournamentSettings(collectTournamentSettingsFromInputs(), { skipInputSync: true });
+    scheduleSave();
+  };
+
+  input.addEventListener('input', syncTournamentSettings);
+  input.addEventListener('change', syncTournamentSettings);
+  input.addEventListener('focus', function(e) {
+    e.stopPropagation();
+    this.select();
+  });
+});
 
 // Score input handlers
 document.querySelectorAll('.score-input').forEach(input => {
