@@ -3084,6 +3084,24 @@ const API_URL = 'https://script.google.com/macros/s/AKfycbz-j6qPRuHsBEpP7z6iQxli
 
 let saveTimeout = null;
 let syncInFlight = false;
+let lastLocalMutationAt = 0;
+
+function getMetaUpdatedAt(meta) {
+  const ts = Number(meta && meta.updatedAt);
+  return Number.isFinite(ts) ? ts : 0;
+}
+
+function getLocalUpdatedAt() {
+  try {
+    return getMetaUpdatedAt(JSON.parse(localStorage.getItem('kubokMeta') || '{}'));
+  } catch (e) {
+    return 0;
+  }
+}
+
+function markLocalMutation() {
+  lastLocalMutationAt = Date.now();
+}
 
 function collectAllData() {
   const scores = {};
@@ -3187,6 +3205,13 @@ async function loadData(options = {}) {
       cache: 'no-store'
     });
     const data = await res.json();
+    const remoteUpdatedAt = getMetaUpdatedAt(data.meta);
+    const localUpdatedAt = getLocalUpdatedAt();
+
+    if (remoteUpdatedAt && localUpdatedAt && remoteUpdatedAt < localUpdatedAt) {
+      console.log('Облако старее локальной правки, пропускаем перезапись');
+      return;
+    }
     
     // Restore scores from API
     if (data.scores) {
@@ -3424,6 +3449,7 @@ function initializeScoreResetVersion() {
 async function syncLatestDataFromApi() {
   if (syncInFlight || document.visibilityState !== 'visible') return;
   if (saveTimeout) return;
+  if (Date.now() - lastLocalMutationAt < 10000) return;
 
   const activeEl = document.activeElement;
   if (activeEl && (
@@ -3448,6 +3474,7 @@ async function syncLatestDataFromApi() {
 
 // ---- SAVE: always to localStorage + API ----
 function scheduleSave() {
+  markLocalMutation();
   applyTournamentSettings(collectTournamentSettingsFromInputs(), { skipInputSync: true });
   const snapshot = collectAllData();
   persistLocalSnapshot(snapshot);
@@ -3459,6 +3486,7 @@ async function saveAllData(snapshot = null, keepalive = false) {
   saveTimeout = null;
   try {
     const data = snapshot || collectAllData();
+    markLocalMutation();
     persistLocalSnapshot(data);
 
     if (!API_URL) return;
@@ -3547,15 +3575,18 @@ document.querySelectorAll('.score-input').forEach(input => {
 
 // Player name input handlers
 document.querySelectorAll('.player-name-input').forEach(input => {
-  input.addEventListener('input', function() {
+  const syncPlayerName = function() {
     if (this.value.trim()) {
       this.classList.add('has-name');
     } else {
       this.classList.remove('has-name');
     }
-    // Auto-save
     scheduleSave();
-  });
+  };
+
+  input.addEventListener('input', syncPlayerName);
+  input.addEventListener('change', syncPlayerName);
+  input.addEventListener('blur', syncPlayerName);
   input.addEventListener('focus', function(e) {
     e.stopPropagation();
     this.select();
@@ -3564,14 +3595,18 @@ document.querySelectorAll('.player-name-input').forEach(input => {
 
 // Judge name input handlers
 document.querySelectorAll('.judge-name-input').forEach(input => {
-  input.addEventListener('input', function() {
+  const syncJudgeName = function() {
     if (this.value.trim()) {
       this.classList.add('has-name');
     } else {
       this.classList.remove('has-name');
     }
     scheduleSave();
-  });
+  };
+
+  input.addEventListener('input', syncJudgeName);
+  input.addEventListener('change', syncJudgeName);
+  input.addEventListener('blur', syncJudgeName);
   input.addEventListener('focus', function(e) {
     e.stopPropagation();
     this.select();
