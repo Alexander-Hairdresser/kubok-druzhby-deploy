@@ -2997,7 +2997,15 @@ function toggleCaptain(teamIdx, playerNum, event) {
     current.classList.add('active');
   }
 
+  const immediateCaptains = {};
+  document.querySelectorAll('.captain-toggle.active').forEach(btn => {
+    immediateCaptains[btn.dataset.team] = btn.dataset.num;
+  });
+  localStorage.setItem('kubokCaptains', JSON.stringify(immediateCaptains));
+  localStorage.setItem('kubokMeta', JSON.stringify({ updatedAt: Date.now() }));
+
   scheduleSave();
+  saveAllData(collectAllData(), true);
 }
 
 function initRegulations() {
@@ -3072,7 +3080,7 @@ document.addEventListener('click', (e) => {
 // ============================================================
 // GOOGLE APPS SCRIPT API
 // ============================================================
-const API_URL = localStorage.getItem('kubokApiUrl') || 'https://script.google.com/macros/s/AKfycbyyYyHEb7Uba6BZOpdmU18Ge_DzGs0xjb_LVVvC9qmXOuEq3xVA9zh0cd2ZEyUQwuNg/exec';
+const API_URL = 'https://script.google.com/macros/s/AKfycbz-j6qPRuHsBEpP7z6iQxliLXJZPOeLJs6w01RR_rHOTBGk4AbWDruBfyU73b6J_3If/exec';
 
 let saveTimeout = null;
 let syncInFlight = false;
@@ -3170,12 +3178,8 @@ async function postApi(payload, keepalive = false) {
   return true;
 }
 
-// ---- RESTORE: localStorage first (instant), then API overwrites ----
+// ---- RESTORE: cloud first, localStorage only as fallback ----
 async function loadData(options = {}) {
-  if (!options.skipLocalRestore) {
-    restoreFromLocalStorage();
-  }
-  
   if (!API_URL) return;
   try {
     const res = await fetch(`${API_URL}?action=getAll&_=${Date.now()}`, {
@@ -3183,15 +3187,6 @@ async function loadData(options = {}) {
       cache: 'no-store'
     });
     const data = await res.json();
-    const localMeta = JSON.parse(localStorage.getItem('kubokMeta') || '{}');
-    const localUpdatedAt = Number(localMeta.updatedAt || 0);
-    const apiUpdatedAt = Number(data?.meta?.updatedAt || 0);
-
-    if (localUpdatedAt && apiUpdatedAt && localUpdatedAt > apiUpdatedAt) {
-      renderStandings();
-      console.log('Локальная версия новее API, оставляем последнюю правку из браузера');
-      return;
-    }
     
     // Restore scores from API
     if (data.scores) {
@@ -3299,9 +3294,13 @@ async function loadData(options = {}) {
     }
     
     renderStandings();
-    console.log('Данные загружены из API');
+    console.log('Данные загружены из облака Google Sheets');
   } catch (e) {
-    console.error('Ошибка загрузки API (используются локальные данные):', e);
+    console.error('Ошибка загрузки облака Google Sheets (используются локальные данные):', e);
+    if (!options.skipLocalRestore) {
+      restoreFromLocalStorage();
+      renderStandings();
+    }
   }
 }
 
@@ -3495,12 +3494,7 @@ function flushSaveOnExit() {
 
 // API URL setup via menu
 function setupApi() {
-  const current = localStorage.getItem('kubokApiUrl') || '';
-  const url = prompt('Вставьте URL вашего Google Apps Script \u0432еб-приложения:', current);
-  if (url !== null) {
-    localStorage.setItem('kubokApiUrl', url.trim());
-    location.reload();
-  }
+  alert('Для всех пользователей используется единый облачный Google Apps Script. Локальная смена API отключена, чтобы у всех была одна и та же база данных.');
 }
 
 // ============================================================
@@ -3607,15 +3601,15 @@ let gameRAF = null;
 let gameCleanup = null;
 
 const gameAssets = {
-  goal: Object.assign(new Image(), { src: 'ворота 2.png' }),
+  goal: Object.assign(new Image(), { src: 'assets/ворота 2.png' }),
   keeper: {
-    low: Object.assign(new Image(), { src: 'ловлю.PNG' }),
-    save: Object.assign(new Image(), { src: 'отбито.png' }),
-    miss: Object.assign(new Image(), { src: 'мимо.PNG' }),
-    goal: Object.assign(new Image(), { src: 'гол.PNG' }),
+    low: Object.assign(new Image(), { src: 'assets/ловлю.PNG' }),
+    save: Object.assign(new Image(), { src: 'assets/отбито.png' }),
+    miss: Object.assign(new Image(), { src: 'assets/мимо.PNG' }),
+    goal: Object.assign(new Image(), { src: 'assets/гол.PNG' }),
   },
   ball: {
-    idle: Object.assign(new Image(), { src: 'мяч.PNG' }),
+    idle: Object.assign(new Image(), { src: 'assets/мяч.PNG' }),
   },
 };
 
