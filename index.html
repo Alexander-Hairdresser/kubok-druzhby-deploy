@@ -3129,10 +3129,15 @@ function collectAllData() {
     startTime: tournamentSettings.startTime
   };
 
-  return { scores, players, judges, checkboxes, budget, captains, regulations, settings };
+  const meta = {
+    updatedAt: Date.now()
+  };
+
+  return { scores, players, judges, checkboxes, budget, captains, regulations, settings, meta };
 }
 
 function persistLocalSnapshot(snapshot) {
+  localStorage.setItem('kubokScores', JSON.stringify(snapshot.scores || {}));
   localStorage.setItem('kubokPlayers', JSON.stringify(snapshot.players));
   localStorage.setItem('kubokJudges', JSON.stringify(snapshot.judges));
   localStorage.setItem('kubokCheckboxes', JSON.stringify(snapshot.checkboxes));
@@ -3144,6 +3149,7 @@ function persistLocalSnapshot(snapshot) {
     matchDuration: tournamentSettings.matchDuration,
     startTime: tournamentSettings.startTime
   }));
+  localStorage.setItem('kubokMeta', JSON.stringify(snapshot.meta || { updatedAt: Date.now() }));
 }
 
 async function postApi(payload, keepalive = false) {
@@ -3169,8 +3175,20 @@ async function loadData() {
   
   if (!API_URL) return;
   try {
-    const res = await fetch(API_URL + '?action=getAll', { redirect: 'follow' });
+    const res = await fetch(`${API_URL}?action=getAll&_=${Date.now()}`, {
+      redirect: 'follow',
+      cache: 'no-store'
+    });
     const data = await res.json();
+    const localMeta = JSON.parse(localStorage.getItem('kubokMeta') || '{}');
+    const localUpdatedAt = Number(localMeta.updatedAt || 0);
+    const apiUpdatedAt = Number(data?.meta?.updatedAt || 0);
+
+    if (localUpdatedAt && apiUpdatedAt && localUpdatedAt > apiUpdatedAt) {
+      renderStandings();
+      console.log('Локальная версия новее API, оставляем последнюю правку из браузера');
+      return;
+    }
     
     // Restore scores from API
     if (data.scores) {
@@ -3179,13 +3197,14 @@ async function loadData() {
         const awayInput = document.querySelector(`.score-input[data-match="${matchNum}"][data-side="away"]`);
         if (homeInput && data.scores[matchNum].home != null) {
           homeInput.value = data.scores[matchNum].home;
-          if (parseInt(homeInput.value) > 0) homeInput.classList.add('has-value');
+          homeInput.classList.toggle('has-value', homeInput.value !== '' && homeInput.value !== '0');
         }
         if (awayInput && data.scores[matchNum].away != null) {
           awayInput.value = data.scores[matchNum].away;
-          if (parseInt(awayInput.value) > 0) awayInput.classList.add('has-value');
+          awayInput.classList.toggle('has-value', awayInput.value !== '' && awayInput.value !== '0');
         }
       });
+      localStorage.setItem('kubokScores', JSON.stringify(data.scores));
     }
     
     // Restore players from API
@@ -3271,6 +3290,10 @@ async function loadData() {
       localStorage.setItem('kubokBudget', JSON.stringify(data.budget));
       updateBudgetTotals();
     }
+
+    if (data.meta) {
+      localStorage.setItem('kubokMeta', JSON.stringify(data.meta));
+    }
     
     renderStandings();
     console.log('Данные загружены из API');
@@ -3283,6 +3306,22 @@ function restoreFromLocalStorage() {
   try {
     const settings = JSON.parse(localStorage.getItem('kubokSettings') || '{}');
     applyTournamentSettings(settings);
+  } catch(e) {}
+
+  try {
+    const scores = JSON.parse(localStorage.getItem('kubokScores') || '{}');
+    Object.keys(scores).forEach(matchNum => {
+      const homeInput = document.querySelector(`.score-input[data-match="${matchNum}"][data-side="home"]`);
+      const awayInput = document.querySelector(`.score-input[data-match="${matchNum}"][data-side="away"]`);
+      if (homeInput && scores[matchNum] && scores[matchNum].home != null) {
+        homeInput.value = scores[matchNum].home;
+        homeInput.classList.toggle('has-value', homeInput.value !== '' && homeInput.value !== '0');
+      }
+      if (awayInput && scores[matchNum] && scores[matchNum].away != null) {
+        awayInput.value = scores[matchNum].away;
+        awayInput.classList.toggle('has-value', awayInput.value !== '' && awayInput.value !== '0');
+      }
+    });
   } catch(e) {}
 
   // Players from localStorage
@@ -3368,7 +3407,7 @@ async function saveAllData(snapshot = null, keepalive = false) {
     try {
       await postApi({ action: 'saveAllData', ...data }, keepalive);
     } catch (unifiedError) {
-      await postApi({ action: 'saveAllScores', scores: data.scores }, keepalive);
+      await postApi({ action: 'saveAllScores', scores: data.scores, meta: data.meta }, keepalive);
       await postApi({
         action: 'saveAllPlayers',
         players: data.players,
@@ -3377,7 +3416,8 @@ async function saveAllData(snapshot = null, keepalive = false) {
         budget: data.budget,
         captains: data.captains,
         regulations: data.regulations,
-        settings: data.settings
+        settings: data.settings,
+        meta: data.meta
       }, keepalive);
       console.warn('saveAllData недоступен, использован запасной режим:', unifiedError);
     }
