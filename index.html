@@ -3001,11 +3001,13 @@ function toggleCaptain(teamIdx, playerNum, event) {
   document.querySelectorAll('.captain-toggle.active').forEach(btn => {
     immediateCaptains[btn.dataset.team] = btn.dataset.num;
   });
-  localStorage.setItem('kubokCaptains', JSON.stringify(immediateCaptains));
-  localStorage.setItem('kubokMeta', JSON.stringify({ updatedAt: Date.now() }));
+  const snapshot = collectAllData();
+  snapshot.captains = immediateCaptains;
+  snapshot.meta = { updatedAt: Date.now() };
+  persistLocalSnapshot(snapshot);
 
   scheduleSave();
-  saveAllData(collectAllData(), true);
+  saveAllData(snapshot, false);
 }
 
 function initRegulations() {
@@ -3241,6 +3243,18 @@ async function loadData(options = {}) {
         }
       });
       localStorage.setItem('kubokPlayers', JSON.stringify(data.players));
+    } else {
+      try {
+        const localPlayers = JSON.parse(localStorage.getItem('kubokPlayers') || '{}');
+        Object.keys(localPlayers).forEach(key => {
+          const [teamIdx, playerNum] = key.split('_');
+          const input = document.querySelector(`.player-name-input[data-team="${teamIdx}"][data-num="${playerNum}"]`);
+          if (input && localPlayers[key]) {
+            input.value = localPlayers[key];
+            input.classList.add('has-name');
+          }
+        });
+      } catch (e) {}
     }
 
     if (data.captains && Object.keys(data.captains).length > 0) {
@@ -3250,6 +3264,15 @@ async function loadData(options = {}) {
         if (btn) btn.classList.add('active');
       });
       localStorage.setItem('kubokCaptains', JSON.stringify(data.captains));
+    } else {
+      try {
+        const localCaptains = JSON.parse(localStorage.getItem('kubokCaptains') || '{}');
+        document.querySelectorAll('.captain-toggle.active').forEach(el => el.classList.remove('active'));
+        Object.keys(localCaptains).forEach(teamIdx => {
+          const btn = document.querySelector(`.captain-toggle[data-team="${teamIdx}"][data-num="${localCaptains[teamIdx]}"]`);
+          if (btn) btn.classList.add('active');
+        });
+      } catch (e) {}
     }
 
     if (data.regulations) {
@@ -3584,9 +3607,14 @@ document.querySelectorAll('.player-name-input').forEach(input => {
     scheduleSave();
   };
 
+  const flushPlayerName = function() {
+    syncPlayerName.call(this);
+    saveAllData(collectAllData(), false);
+  };
+
   input.addEventListener('input', syncPlayerName);
-  input.addEventListener('change', syncPlayerName);
-  input.addEventListener('blur', syncPlayerName);
+  input.addEventListener('change', flushPlayerName);
+  input.addEventListener('blur', flushPlayerName);
   input.addEventListener('focus', function(e) {
     e.stopPropagation();
     this.select();
@@ -3604,9 +3632,14 @@ document.querySelectorAll('.judge-name-input').forEach(input => {
     scheduleSave();
   };
 
+  const flushJudgeName = function() {
+    syncJudgeName.call(this);
+    saveAllData(collectAllData(), false);
+  };
+
   input.addEventListener('input', syncJudgeName);
-  input.addEventListener('change', syncJudgeName);
-  input.addEventListener('blur', syncJudgeName);
+  input.addEventListener('change', flushJudgeName);
+  input.addEventListener('blur', flushJudgeName);
   input.addEventListener('focus', function(e) {
     e.stopPropagation();
     this.select();
