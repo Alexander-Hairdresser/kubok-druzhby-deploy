@@ -3449,7 +3449,7 @@ function initializeScoreResetVersion() {
 async function syncLatestDataFromApi() {
   if (syncInFlight || document.visibilityState !== 'visible') return;
   if (saveTimeout) return;
-  if (Date.now() - lastLocalMutationAt < 4000) return;
+  if (Date.now() - lastLocalMutationAt < 10000) return;
 
   const activeEl = document.activeElement;
   if (activeEl && (
@@ -3479,7 +3479,7 @@ function scheduleSave() {
   const snapshot = collectAllData();
   persistLocalSnapshot(snapshot);
   clearTimeout(saveTimeout);
-  saveTimeout = setTimeout(() => saveAllData(snapshot), 250);
+  saveTimeout = setTimeout(() => saveAllData(snapshot), 600);
 }
 
 async function saveAllData(snapshot = null, keepalive = false) {
@@ -3626,7 +3626,7 @@ loadData();
 if (didResetScores) {
   saveAllData(collectAllData());
 }
-setInterval(syncLatestDataFromApi, 2000);
+setInterval(syncLatestDataFromApi, 5000);
 
 // ============================================================
 // MINI-GAME: Удар по воротам
