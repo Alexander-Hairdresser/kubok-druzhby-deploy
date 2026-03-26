@@ -2152,7 +2152,7 @@ section {
       </g>
     </svg>
 
-    <div class="hero-pretitle">Братский футбол</div>
+    <div class="hero-pretitle">Играем в футбол</div>
     <h1 class="hero-title">Кубок Дружбы</h1>
     <div class="hero-year">Смоленск 2026</div>
 
@@ -2235,7 +2235,7 @@ section {
       </div>
       <div class="info-card">
         <div class="info-value info-value-editable">
-          <input class="info-input tournament-setting-input" id="startTimeInput" type="time" step="60" value="12:45">
+          <input class="info-input tournament-setting-input" id="startTimeInput" type="time" step="60" value="12:00">
         </div>
         <div class="info-label">Начало</div>
       </div>
@@ -2376,31 +2376,31 @@ const teams = [
   { id: 3, name: 'Брянск', abbr: 'БР', city: 'Брянск', color: '#dc2626' },
   { id: 4, name: 'Орёл', abbr: 'ОР', city: 'Орёл', color: '#16a34a' },
   { id: 5, name: 'Орша', abbr: 'ОШ', city: 'Орша', color: '#0891b2' },
-  { id: 6, name: 'Витебск', abbr: 'ВТБ', city: 'Витебск', color: '#4a90d9' },
+  { id: 6, name: 'Братэ', abbr: 'БРТ', city: 'Витебск', color: '#4a90d9' },
 ];
 
 const matches = [
-  { num: 1, round: 1, home: 'Тёмная Лошадка', away: 'Витебск', time: '12:45-13:00' },
+  { num: 1, round: 1, home: 'Тёмная Лошадка', away: 'Братэ', time: '12:00-12:15' },
   { num: 2, round: 1, home: 'Альтернатива', away: 'Орёл', time: '13:03-13:18' },
   { num: 3, round: 1, home: 'Брянск', away: 'Орша', time: '13:21-13:36' },
-  { num: 4, round: 2, home: 'Витебск', away: 'Орёл', time: '13:39-13:54' },
+  { num: 4, round: 2, home: 'Братэ', away: 'Орёл', time: '13:39-13:54' },
   { num: 5, round: 2, home: 'Тёмная Лошадка', away: 'Орша', time: '13:57-14:12' },
   { num: 6, round: 2, home: 'Альтернатива', away: 'Брянск', time: '14:15-14:30' },
   { num: 7, round: 3, home: 'Орёл', away: 'Тёмная Лошадка', time: '14:33-14:48' },
-  { num: 8, round: 3, home: 'Витебск', away: 'Брянск', time: '14:51-15:06' },
+  { num: 8, round: 3, home: 'Братэ', away: 'Брянск', time: '14:51-15:06' },
   { num: 9, round: 3, home: 'Орша', away: 'Альтернатива', time: '15:09-15:24' },
   { num: 10, round: 4, home: 'Орёл', away: 'Брянск', time: '15:27-15:42' },
   { num: 11, round: 4, home: 'Тёмная Лошадка', away: 'Альтернатива', time: '15:45-16:00' },
-  { num: 12, round: 4, home: 'Витебск', away: 'Орша', time: '16:03-16:18' },
+  { num: 12, round: 4, home: 'Братэ', away: 'Орша', time: '16:03-16:18' },
   { num: 13, round: 5, home: 'Тёмная Лошадка', away: 'Брянск', time: '16:21-16:36' },
   { num: 14, round: 5, home: 'Орёл', away: 'Орша', time: '16:39-16:54' },
-  { num: 15, round: 5, home: 'Альтернатива', away: 'Витебск', time: '16:57-17:12' },
+  { num: 15, round: 5, home: 'Альтернатива', away: 'Братэ', time: '16:57-17:12' },
 ];
 
 const tournamentSettingsDefaults = {
   matchDuration: 15,
   breakDuration: 3,
-  startTime: '12:45'
+  startTime: '12:00'
 };
 
 const tournamentSettings = { ...tournamentSettingsDefaults };
@@ -2555,13 +2555,13 @@ const budgetItems = [
 ];
 
 const regulationDefaults = {
-  tournament: `Наш турнир носит дружеский и братский характер. Его главная цель - не определить сильнейшую команду любой ценой, а создать добрую атмосферу общения, взаимного уважения и совместного отдыха.
+  tournament: `Наш турнир носит дружеский характер. Его главная цель - не определить сильнейшую команду любой ценой, а создать добрую атмосферу общения, взаимного уважения и совместного отдыха.
 
 Футбол в рамках турнира рассматривается как способ собраться вместе, проявить хорошие качества, поддержать друг друга и провести день в спокойной и позитивной обстановке.
 
 От всех участников ожидаются уважительное поведение, самообладание, аккуратная игра и внимательное отношение к соперникам и партнёрам по команде. Излишняя жёсткость, грубая борьба, опасные столкновения, чрезмерно сильные удары и негативные высказывания не соответствуют духу турнира.
 
-Безопасность участников, братская атмосфера и корректное поведение на поле имеют приоритет над спортивным результатом.
+Безопасность участников, играем в футбол и корректное поведение на поле имеют приоритет над спортивным результатом.
 
 Капитаны команд несут дополнительную ответственность за настрой своих игроков и соблюдение установленных правил на протяжении всего турнира.`,
   judges: `Судейство осуществляется самими командами. Просим заранее определить из состава команды тех, кто сможет грамотно и спокойно выполнять обязанности судьи.
@@ -2578,7 +2578,7 @@ const regulationDefaults = {
 
 Если у двух команд одинаковый или схожий цвет формы, на время матча одной из команд выдаются манишки.
 
-Основной принцип судейства на турнире - сохранить уважительную, безопасную и братскую атмосферу игры. Главная задача судьи состоит не только в контроле правил, но и в поддержании спокойного и доброжелательного хода матча.`
+Основной принцип судейства на турнире - сохранить уважительную, безопасную атмосферу игры. Главная задача судьи состоит не только в контроле правил, но и в поддержании спокойного и доброжелательного хода матча.`
 };
 
 // ============================================================
@@ -3027,9 +3027,20 @@ function initRegulations() {
       localStorage.setItem(key, fallback);
     }
     input.value = localStorage.getItem(key) || fallback;
-    input.addEventListener('input', () => {
+
+    const syncRegulationField = () => {
       localStorage.setItem(key, input.value);
-    });
+      scheduleSave();
+    };
+
+    const flushRegulationField = () => {
+      syncRegulationField();
+      saveAllData(collectAllData(), false);
+    };
+
+    input.addEventListener('input', syncRegulationField);
+    input.addEventListener('change', flushRegulationField);
+    input.addEventListener('blur', flushRegulationField);
   });
 
   if (shouldRefreshDefaults) {
@@ -3278,10 +3289,10 @@ async function loadData(options = {}) {
     if (data.regulations) {
       const tournamentText = document.getElementById('regTournamentText');
       const judgesText = document.getElementById('regJudgesText');
-      if (tournamentText && typeof data.regulations.tournament === 'string' && data.regulations.tournament.trim()) {
+      if (tournamentText && typeof data.regulations.tournament === 'string') {
         tournamentText.value = data.regulations.tournament;
       }
-      if (judgesText && typeof data.regulations.judges === 'string' && data.regulations.judges.trim()) {
+      if (judgesText && typeof data.regulations.judges === 'string') {
         judgesText.value = data.regulations.judges;
       }
       localStorage.setItem('kubokRegTournament', data.regulations.tournament || '');
@@ -3666,6 +3677,64 @@ setInterval(syncLatestDataFromApi, 5000);
 // ============================================================
 let gameActive = false;
 let gameRAF = null;
+let gameAudioContext = null;
+let lastMissLaughAt = 0;
+
+function ensureGameAudioContext() {
+  const AudioCtx = window.AudioContext || window.webkitAudioContext;
+  if (!AudioCtx) return null;
+  if (!gameAudioContext) {
+    gameAudioContext = new AudioCtx();
+  }
+  if (gameAudioContext.state === 'suspended') {
+    gameAudioContext.resume().catch(() => {});
+  }
+  return gameAudioContext;
+}
+
+function playMissLaughSound() {
+  const ctx = ensureGameAudioContext();
+  if (!ctx) return;
+
+  const now = Date.now();
+  if (now - lastMissLaughAt < 450) return;
+  lastMissLaughAt = now;
+
+  const start = ctx.currentTime + 0.01;
+  const notes = [520, 660, 590, 460];
+  const durations = [0.07, 0.07, 0.08, 0.14];
+
+  notes.forEach((freq, index) => {
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    const wobble = ctx.createOscillator();
+    const wobbleGain = ctx.createGain();
+    const noteStart = start + durations.slice(0, index).reduce((a, b) => a + b, 0);
+    const noteEnd = noteStart + durations[index];
+
+    osc.type = index < 2 ? 'triangle' : 'square';
+    osc.frequency.setValueAtTime(freq, noteStart);
+    osc.frequency.exponentialRampToValueAtTime(Math.max(180, freq * 0.72), noteEnd);
+
+    wobble.type = 'sine';
+    wobble.frequency.setValueAtTime(index < 2 ? 9 : 7, noteStart);
+    wobbleGain.gain.setValueAtTime(index < 2 ? 16 : 10, noteStart);
+
+    gain.gain.setValueAtTime(0.0001, noteStart);
+    gain.gain.exponentialRampToValueAtTime(0.05, noteStart + 0.02);
+    gain.gain.exponentialRampToValueAtTime(0.0001, noteEnd);
+
+    wobble.connect(wobbleGain);
+    wobbleGain.connect(osc.frequency);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+
+    osc.start(noteStart);
+    wobble.start(noteStart);
+    osc.stop(noteEnd);
+    wobble.stop(noteEnd);
+  });
+}
 let gameCleanup = null;
 
 const gameAssets = {
@@ -4113,7 +4182,8 @@ function initGame() {
       } else {
         // Missed the goal entirely
         resultText = 'МИМО!';
-        keeperReaction = 'miss';
+          keeperReaction = 'miss';
+          playMissLaughSound();
         lives--;
       }
       b.active = false;
@@ -4125,6 +4195,7 @@ function initGame() {
     if (b.y < -20 || b.x < -20 || b.x > viewportWidth + 20) {
       resultText = 'МИМО!';
       keeperReaction = 'miss';
+      playMissLaughSound();
       lives--;
       b.active = false;
       showResult = true;
