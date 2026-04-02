@@ -1124,6 +1124,37 @@ section {
   margin-top: 0.1rem;
 }
 
+.match-time .judge-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.25rem;
+  margin-top: 0.4rem;
+  padding: 0.28rem 0.55rem;
+  border-radius: 999px;
+  background: rgba(232, 122, 58, 0.1);
+  border: 1px solid rgba(232, 122, 58, 0.18);
+  color: var(--orange-100);
+  font-size: 0.62rem;
+  line-height: 1.1;
+  text-align: right;
+}
+
+.match-meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.match-time-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
 .round-header {
   font-family: var(--font-display);
   font-weight: 600;
@@ -1160,11 +1191,15 @@ section {
   .match-time {
     grid-column: 1 / -1;
     text-align: left;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
     padding-top: 0.5rem;
     border-top: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .match-time .judge-badge {
+    margin-top: 0;
+    justify-content: center;
+    text-align: center;
+    white-space: nowrap;
   }
 }
 
@@ -2235,7 +2270,7 @@ section {
       </div>
       <div class="info-card">
         <div class="info-value info-value-editable">
-          <input class="info-input tournament-setting-input" id="startTimeInput" type="time" step="60" value="12:00">
+          <input class="info-input tournament-setting-input" id="startTimeInput" type="time" step="60" value="12:45">
         </div>
         <div class="info-label">Начало</div>
       </div>
@@ -2380,27 +2415,27 @@ const teams = [
 ];
 
 const matches = [
-  { num: 1, round: 1, home: 'Тёмная Лошадка', away: 'Братэ', time: '12:00-12:15' },
-  { num: 2, round: 1, home: 'Альтернатива', away: 'Орёл', time: '13:03-13:18' },
-  { num: 3, round: 1, home: 'Брянск', away: 'Орша', time: '13:21-13:36' },
-  { num: 4, round: 2, home: 'Братэ', away: 'Орёл', time: '13:39-13:54' },
-  { num: 5, round: 2, home: 'Тёмная Лошадка', away: 'Орша', time: '13:57-14:12' },
-  { num: 6, round: 2, home: 'Альтернатива', away: 'Брянск', time: '14:15-14:30' },
-  { num: 7, round: 3, home: 'Орёл', away: 'Тёмная Лошадка', time: '14:33-14:48' },
-  { num: 8, round: 3, home: 'Братэ', away: 'Брянск', time: '14:51-15:06' },
-  { num: 9, round: 3, home: 'Орша', away: 'Альтернатива', time: '15:09-15:24' },
-  { num: 10, round: 4, home: 'Орёл', away: 'Брянск', time: '15:27-15:42' },
-  { num: 11, round: 4, home: 'Тёмная Лошадка', away: 'Альтернатива', time: '15:45-16:00' },
-  { num: 12, round: 4, home: 'Братэ', away: 'Орша', time: '16:03-16:18' },
-  { num: 13, round: 5, home: 'Тёмная Лошадка', away: 'Брянск', time: '16:21-16:36' },
-  { num: 14, round: 5, home: 'Орёл', away: 'Орша', time: '16:39-16:54' },
-  { num: 15, round: 5, home: 'Альтернатива', away: 'Братэ', time: '16:57-17:12' },
+  { num: 1, round: 1, home: 'Тёмная Лошадка', away: 'Братэ', time: '12:45-13:00', judge: 'Брянск' },
+  { num: 2, round: 1, home: 'Альтернатива', away: 'Орёл', time: '13:03-13:18', judge: 'Братэ' },
+  { num: 3, round: 1, home: 'Брянск', away: 'Орша', time: '13:21-13:36', judge: 'Тёмная Лошадка' },
+  { num: 4, round: 2, home: 'Братэ', away: 'Орёл', time: '13:39-13:54', judge: 'Альтернатива' },
+  { num: 5, round: 2, home: 'Тёмная Лошадка', away: 'Орша', time: '13:57-14:12', judge: 'Брянск' },
+  { num: 6, round: 2, home: 'Альтернатива', away: 'Брянск', time: '14:15-14:30', judge: 'Орёл' },
+  { num: 7, round: 3, home: 'Орёл', away: 'Тёмная Лошадка', time: '14:33-14:48', judge: 'Братэ' },
+  { num: 8, round: 3, home: 'Братэ', away: 'Брянск', time: '14:51-15:06', judge: 'Альтернатива' },
+  { num: 9, round: 3, home: 'Орша', away: 'Альтернатива', time: '15:09-15:24', judge: 'Орёл' },
+  { num: 10, round: 4, home: 'Орёл', away: 'Брянск', time: '15:27-15:42', judge: 'Тёмная Лошадка' },
+  { num: 11, round: 4, home: 'Тёмная Лошадка', away: 'Альтернатива', time: '15:45-16:00', judge: 'Орша' },
+  { num: 12, round: 4, home: 'Братэ', away: 'Орша', time: '16:03-16:18', judge: 'Брянск' },
+  { num: 13, round: 5, home: 'Тёмная Лошадка', away: 'Брянск', time: '16:21-16:36', judge: 'Орёл' },
+  { num: 14, round: 5, home: 'Орёл', away: 'Орша', time: '16:39-16:54', judge: 'Альтернатива' },
+  { num: 15, round: 5, home: 'Альтернатива', away: 'Братэ', time: '16:57-17:12', judge: 'Брянск' },
 ];
 
 const tournamentSettingsDefaults = {
   matchDuration: 15,
   breakDuration: 3,
-  startTime: '12:00'
+  startTime: '12:45'
 };
 
 const tournamentSettings = { ...tournamentSettingsDefaults };
@@ -2486,13 +2521,13 @@ function collectTournamentSettingsFromInputs() {
 applyTournamentSettings(tournamentSettingsDefaults, { skipRenderedUpdate: true });
 
 const judgesData = {
-  main: { role: 'Главный судья', name: '' },
+  main: { role: 'Смоленск', name: 'КЭП' },
   assistants: [
-    { role: 'Помощник судьи 1', name: '' },
-    { role: 'Помощник судьи 2', name: '' },
-    { role: 'Помощник судьи 3', name: '' },
-    { role: 'Помощник судьи 4', name: '' },
-    { role: 'Помощник судьи 5', name: '' },
+    { role: 'От команды Орёл', name: '' },
+    { role: 'От команды Брянск', name: '' },
+    { role: 'От команды Альтернатива', name: '' },
+    { role: 'От команды Орша', name: '' },
+    { role: 'От команды Братэ', name: '' },
   ]
 };
 
@@ -2727,8 +2762,13 @@ function renderSchedule() {
         </div>
       </div>
       <div class="match-time">
-        <div class="time" data-match-time="${m.num}">${m.time}</div>
-        <div class="status">Предстоящий</div>
+        <div class="match-meta-row">
+          <div class="match-time-left">
+            <div class="time" data-match-time="${m.num}">${m.time}</div>
+            <div class="status">Предстоящий</div>
+          </div>
+          <div class="judge-badge">Судья: ${m.judge}</div>
+        </div>
       </div>
     </div>`;
   });
@@ -2795,21 +2835,22 @@ function renderJudges() {
   const chevronSvg = '<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>';
 
   const mainName = judgesData.main.name || 'Не утверждён';
+  const mainRole = judgesData.main.role || 'Главный судья';
 
   let html = `
     <div class="judge-panel light-beam" onclick="this.classList.toggle('open')">
       <div class="judge-panel-header">
         <div class="judge-panel-icon">${whistleIcon}</div>
         <div class="judge-panel-title">Главный судья</div>
-        <div class="judge-panel-status">${mainName}</div>
+        <div class="judge-panel-status">${mainName} · ${mainRole}</div>
         ${chevronSvg}
       </div>
       <div class="judge-panel-body">
         <div class="judge-panel-content">
           <div class="judge-person">
             <div class="judge-person-num">1</div>
-            <div class="judge-person-role">Главный судья</div>
-            <input type="text" class="judge-name-input" placeholder="Никнейм" data-judge="main" onclick="event.stopPropagation(); this.select();">
+            <div class="judge-person-role">Главный судья · ${mainRole}</div>
+            <input type="text" class="judge-name-input" placeholder="Никнейм" value="${mainName}" data-judge="main" onclick="event.stopPropagation(); this.select();">
           </div>
         </div>
       </div>
@@ -2892,7 +2933,9 @@ function renderBudget() {
         this.classList.remove('has-value');
       }
       updateBudgetTotals();
-      scheduleSave();
+      const snapshot = collectAllData();
+      persistLocalSnapshot(snapshot);
+      saveAllData(snapshot, false);
     });
     input.addEventListener('focus', function() {
       this.select();
@@ -3006,7 +3049,6 @@ function toggleCaptain(teamIdx, playerNum, event) {
   snapshot.meta = { updatedAt: Date.now() };
   persistLocalSnapshot(snapshot);
 
-  scheduleSave();
   saveAllData(snapshot, false);
 }
 
@@ -3067,7 +3109,9 @@ function toggleOrg(idx) {
 
 function toggleCheck(el) {
   el.classList.toggle('checked');
-  scheduleSave();
+  const snapshot = collectAllData();
+  persistLocalSnapshot(snapshot);
+  saveAllData(snapshot, false);
 }
 
 // Ball menu toggle
@@ -3192,6 +3236,24 @@ function persistLocalSnapshot(snapshot) {
   localStorage.setItem('kubokMeta', JSON.stringify(snapshot.meta || { updatedAt: Date.now() }));
 }
 
+function buildSharedPayload(snapshot) {
+  return {
+    action: 'saveAllData',
+    scores: snapshot.scores || {},
+    players: snapshot.players || {},
+    judges: snapshot.judges || {},
+    checkboxes: snapshot.checkboxes || {},
+    budget: snapshot.budget || {},
+    captains: snapshot.captains || {},
+    regulations: snapshot.regulations || {},
+    settings: snapshot.settings || {
+      matchDuration: tournamentSettings.matchDuration,
+      startTime: tournamentSettings.startTime
+    },
+    meta: snapshot.meta || { updatedAt: Date.now() }
+  };
+}
+
 async function postApi(payload, keepalive = false) {
   const res = await fetch(API_URL, {
     method: 'POST',
@@ -3242,49 +3304,6 @@ async function loadData(options = {}) {
       });
       localStorage.setItem('kubokScores', JSON.stringify(data.scores));
     }
-    
-    // Restore players from API
-    if (data.players && Object.keys(data.players).length > 0) {
-      Object.keys(data.players).forEach(key => {
-        const [teamIdx, playerNum] = key.split('_');
-        const input = document.querySelector(`.player-name-input[data-team="${teamIdx}"][data-num="${playerNum}"]`);
-        if (input && data.players[key]) {
-          input.value = data.players[key];
-          input.classList.add('has-name');
-        }
-      });
-      localStorage.setItem('kubokPlayers', JSON.stringify(data.players));
-    } else {
-      try {
-        const localPlayers = JSON.parse(localStorage.getItem('kubokPlayers') || '{}');
-        Object.keys(localPlayers).forEach(key => {
-          const [teamIdx, playerNum] = key.split('_');
-          const input = document.querySelector(`.player-name-input[data-team="${teamIdx}"][data-num="${playerNum}"]`);
-          if (input && localPlayers[key]) {
-            input.value = localPlayers[key];
-            input.classList.add('has-name');
-          }
-        });
-      } catch (e) {}
-    }
-
-    if (data.captains && Object.keys(data.captains).length > 0) {
-      document.querySelectorAll('.captain-toggle.active').forEach(el => el.classList.remove('active'));
-      Object.keys(data.captains).forEach(teamIdx => {
-        const btn = document.querySelector(`.captain-toggle[data-team="${teamIdx}"][data-num="${data.captains[teamIdx]}"]`);
-        if (btn) btn.classList.add('active');
-      });
-      localStorage.setItem('kubokCaptains', JSON.stringify(data.captains));
-    } else {
-      try {
-        const localCaptains = JSON.parse(localStorage.getItem('kubokCaptains') || '{}');
-        document.querySelectorAll('.captain-toggle.active').forEach(el => el.classList.remove('active'));
-        Object.keys(localCaptains).forEach(teamIdx => {
-          const btn = document.querySelector(`.captain-toggle[data-team="${teamIdx}"][data-num="${localCaptains[teamIdx]}"]`);
-          if (btn) btn.classList.add('active');
-        });
-      } catch (e) {}
-    }
 
     if (data.regulations) {
       const tournamentText = document.getElementById('regTournamentText');
@@ -3306,8 +3325,28 @@ async function loadData(options = {}) {
         startTime: tournamentSettings.startTime
       }));
     }
-    
-    // Restore judges from API
+
+    if (data.players && Object.keys(data.players).length > 0) {
+      Object.keys(data.players).forEach(key => {
+        const [teamIdx, playerNum] = key.split('_');
+        const input = document.querySelector(`.player-name-input[data-team="${teamIdx}"][data-num="${playerNum}"]`);
+        if (input && data.players[key]) {
+          input.value = data.players[key];
+          input.classList.add('has-name');
+        }
+      });
+      localStorage.setItem('kubokPlayers', JSON.stringify(data.players));
+    }
+
+    if (data.captains && Object.keys(data.captains).length > 0) {
+      document.querySelectorAll('.captain-toggle.active').forEach(el => el.classList.remove('active'));
+      Object.keys(data.captains).forEach(teamIdx => {
+        const btn = document.querySelector(`.captain-toggle[data-team="${teamIdx}"][data-num="${data.captains[teamIdx]}"]`);
+        if (btn) btn.classList.add('active');
+      });
+      localStorage.setItem('kubokCaptains', JSON.stringify(data.captains));
+    }
+
     if (data.judges && Object.keys(data.judges).length > 0) {
       Object.keys(data.judges).forEach(key => {
         const input = document.querySelector(`.judge-name-input[data-judge="${key}"]`);
@@ -3318,8 +3357,7 @@ async function loadData(options = {}) {
       });
       localStorage.setItem('kubokJudges', JSON.stringify(data.judges));
     }
-    
-    // Restore checkboxes from API
+
     if (data.checkboxes && Object.keys(data.checkboxes).length > 0) {
       document.querySelectorAll('.checkbox.checked').forEach(el => el.classList.remove('checked'));
       Object.keys(data.checkboxes).forEach(key => {
@@ -3329,8 +3367,7 @@ async function loadData(options = {}) {
       });
       localStorage.setItem('kubokCheckboxes', JSON.stringify(data.checkboxes));
     }
-    
-    // Restore budget from API
+
     if (data.budget && Object.keys(data.budget).length > 0) {
       document.querySelectorAll('.budget-input').forEach(input => {
         input.value = '';
@@ -3351,6 +3388,8 @@ async function loadData(options = {}) {
     if (data.meta) {
       localStorage.setItem('kubokMeta', JSON.stringify(data.meta));
     }
+
+    restoreLocalOnlyData();
     
     renderStandings();
     console.log('Данные загружены из облака Google Sheets');
@@ -3385,7 +3424,10 @@ function restoreFromLocalStorage() {
     });
   } catch(e) {}
 
-  // Players from localStorage
+  restoreLocalOnlyData();
+}
+
+function restoreLocalOnlyData() {
   try {
     const players = JSON.parse(localStorage.getItem('kubokPlayers') || '{}');
     Object.keys(players).forEach(key => {
@@ -3407,7 +3449,6 @@ function restoreFromLocalStorage() {
     });
   } catch(e) {}
   
-  // Judges from localStorage
   try {
     const judges = JSON.parse(localStorage.getItem('kubokJudges') || '{}');
     Object.keys(judges).forEach(key => {
@@ -3419,7 +3460,6 @@ function restoreFromLocalStorage() {
     });
   } catch(e) {}
   
-  // Checkboxes from localStorage
   try {
     const checks = JSON.parse(localStorage.getItem('kubokCheckboxes') || '{}');
     document.querySelectorAll('.checkbox.checked').forEach(el => el.classList.remove('checked'));
@@ -3430,7 +3470,6 @@ function restoreFromLocalStorage() {
     });
   } catch(e) {}
   
-  // Budget from localStorage
   try {
     const budget = JSON.parse(localStorage.getItem('kubokBudget') || '{}');
     document.querySelectorAll('.budget-input').forEach(input => {
@@ -3475,7 +3514,6 @@ function initializeScoreResetVersion() {
     return false;
   }
 
-  resetAllScoresToZero();
   localStorage.setItem(versionKey, currentVersion);
   return true;
 }
@@ -3525,23 +3563,7 @@ async function saveAllData(snapshot = null, keepalive = false) {
 
     if (!API_URL) return;
 
-    try {
-      await postApi({ action: 'saveAllData', ...data }, keepalive);
-    } catch (unifiedError) {
-      await postApi({ action: 'saveAllScores', scores: data.scores, meta: data.meta }, keepalive);
-      await postApi({
-        action: 'saveAllPlayers',
-        players: data.players,
-        judges: data.judges,
-        checkboxes: data.checkboxes,
-        budget: data.budget,
-        captains: data.captains,
-        regulations: data.regulations,
-        settings: data.settings,
-        meta: data.meta
-      }, keepalive);
-      console.warn('saveAllData недоступен, использован запасной режим:', unifiedError);
-    }
+    await postApi(buildSharedPayload(data), keepalive);
 
     console.log('Сохранено (localStorage + API)');
   } catch (e) {
@@ -3615,7 +3637,8 @@ document.querySelectorAll('.player-name-input').forEach(input => {
     } else {
       this.classList.remove('has-name');
     }
-    scheduleSave();
+    const snapshot = collectAllData();
+    persistLocalSnapshot(snapshot);
   };
 
   const flushPlayerName = function() {
@@ -3640,7 +3663,8 @@ document.querySelectorAll('.judge-name-input').forEach(input => {
     } else {
       this.classList.remove('has-name');
     }
-    scheduleSave();
+    const snapshot = collectAllData();
+    persistLocalSnapshot(snapshot);
   };
 
   const flushJudgeName = function() {
@@ -3667,9 +3691,6 @@ document.addEventListener('visibilitychange', () => {
 
 // Load data from Google Sheets on startup
 loadData();
-if (didResetScores) {
-  saveAllData(collectAllData());
-}
 setInterval(syncLatestDataFromApi, 5000);
 
 // ============================================================
